@@ -20,7 +20,11 @@ $prot = $isSSL() ? 'https://' : 'http://';
 // $config['base_url'] = $prot . $host . "/";
 $base_url = $prot . $_SERVER['HTTP_HOST'] .
 	str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']);
-$conn = new mysqli('localhost', 'root', '', 'db_apsystem');
+if ($serverIP === 'localhost' || $serverIP === '127.0.0.1') {
+    $conn = new mysqli('localhost', 'root', '', 'db_apsystem');
+} else {
+    $conn = new mysqli('localhost', 'db_apsystem', 'db_apsystem', 'db_apsystem');
+}
 
 if ($conn->connect_error) {
 	die("Connection failed: " . $conn->connect_error);
