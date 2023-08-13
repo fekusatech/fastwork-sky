@@ -9,32 +9,25 @@
           	</div>
           	<div class="modal-body">
             	<form class="form-horizontal" method="POST" action="profile_update.php?return=<?php echo basename($_SERVER['PHP_SELF']); ?>" enctype="multipart/form-data">
-          		  <div class="form-group">
-                  	<label for="username" class="col-sm-3 control-label">Username</label>
-
-                  	<div class="col-sm-9">
-                    	<input type="text" class="form-control" id="username" name="username" value="<?php echo $user['username']; ?>">
-                  	</div>
-                </div>
                 <div class="form-group">
                     <label for="password" class="col-sm-3 control-label">Password</label>
 
                     <div class="col-sm-9"> 
-                      <input type="password" class="form-control" id="password" name="password" value="<?php echo $user['password']; ?>">
+                      <input type="password" class="form-control" id="password" name="password" value="<?php echo $_SESSION['data']['password']; ?>">
                     </div>
                 </div>
                 <div class="form-group">
                   	<label for="firstname" class="col-sm-3 control-label">Nama Depan</label>
 
                   	<div class="col-sm-9">
-                    	<input type="text" class="form-control" id="firstname" name="firstname" value="<?php echo $user['firstname']; ?>">
+                    	<input type="text" class="form-control" id="firstname" name="firstname" value="<?php echo $_SESSION['data']['firstname']; ?>">
                   	</div>
                 </div>
                 <div class="form-group">
                   	<label for="lastname" class="col-sm-3 control-label">Nama Belakang</label>
 
                   	<div class="col-sm-9">
-                    	<input type="text" class="form-control" id="lastname" name="lastname" value="<?php echo $user['lastname']; ?>">
+                    	<input type="text" class="form-control" id="lastname" name="lastname" value="<?php echo $_SESSION['data']['lastname']; ?>">
                   	</div>
                 </div>
                 <div class="form-group">

@@ -53,40 +53,21 @@
       ?>
       <!-- Small boxes (Stat box) -->
       <div class="row">
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-aqua">
-            <div class="inner">
-              <?php
-                $sql = "SELECT * FROM employees";
-                $query = $conn->query($sql);
-
-                echo "<h3>".$query->num_rows."</h3>";
-              ?>
-
-              <p>Total Employees</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-person-stalker"></i>
-            </div>
-            <a href="employee.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
         <!-- ./col -->
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
               <?php
-                $sql = "SELECT * FROM attendance";
+                $sql = "SELECT * FROM attendance where employee_id = '{$user['id']}'";
                 $query = $conn->query($sql);
-                $total = $query->num_rows;
+                $total = $query->num_rows > 0 ? $query->num_rows : 0 ;
 
-                $sql = "SELECT * FROM attendance WHERE status = 1";
+                $sql = "SELECT * FROM attendance WHERE status = 1 and employee_id = '{$user['id']}'";
                 $query = $conn->query($sql);
-                $early = $query->num_rows;
-                
-                $percentage = ($early/$total)*100;
+                $early = $query->num_rows > 0 ? $query->num_rows : 0 ;
+
+                $percentage = $total <> 0 ? ((float)$early/(float)$total)*100 : 0;
 
                 echo "<h3>".number_format($percentage, 2)."<sup style='font-size: 20px'>%</sup></h3>";
               ?>
@@ -105,7 +86,7 @@
           <div class="small-box bg-yellow">
             <div class="inner">
               <?php
-                $sql = "SELECT * FROM attendance WHERE date = '$today' AND status = 1";
+                $sql = "SELECT * FROM attendance WHERE date = '$today' AND status = 1 and employee_id = '{$user['id']}'";
                 $query = $conn->query($sql);
 
                 echo "<h3>".$query->num_rows."</h3>"
@@ -125,7 +106,7 @@
           <div class="small-box bg-red">
             <div class="inner">
               <?php
-                $sql = "SELECT * FROM attendance WHERE date = '$today' AND status = 0";
+                $sql = "SELECT * FROM attendance WHERE date = '$today' AND status = 0 and employee_id = '{$user['id']}'";
                 $query = $conn->query($sql);
 
                 echo "<h3>".$query->num_rows."</h3>"
@@ -186,7 +167,7 @@
 
 <!-- Chart Data -->
 <?php
-  $and = 'AND YEAR(date) = '.$year;
+  $and = 'AND YEAR(date) = '.$year." AND employee_id = '{$user['id']}'";
   $months = array();
   $ontime = array();
   $late = array();

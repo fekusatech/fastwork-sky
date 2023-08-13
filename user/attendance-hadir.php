@@ -12,11 +12,11 @@
       <!-- Content Header (Page header) -->
       <section class="content-header">
         <h1>
-          Attendance
+          Absensi
         </h1>
         <ol class="breadcrumb">
           <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-          <li class="active">Attendance</li>
+          <li class="active">Absensi</li>
         </ol>
       </section>
       <!-- Main content -->
@@ -47,48 +47,34 @@
           <div class="col-xs-12">
             <div class="box">
               <div class="box-header with-border">
-                <!-- <a href="#addnew" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> New</a> -->
+                <h4 class="login-box-msg">Masukkan ID Karyawan</h4>
               </div>
               <div class="box-body">
-                <table id="example1" class="table table-bordered">
-                  <thead>
-                    <th class="hidden"></th>
-                    <th>Tanggal</th>
-                    <th>ID Karyawan</th>
-                    <th>Nama</th>
-                    <th>Time In</th>
-                    <th>Time Out</th>
-                    <th>Tools</th>
-                  </thead>
-                  <tbody>
-                    <?php
-                    $sql = "SELECT *, employees.employee_id AS empid, attendance.id AS attid FROM attendance LEFT JOIN employees ON employees.id=attendance.employee_id WHERE employees.employee_id = '{$user['employee_id']}' ORDER BY attendance.date DESC, attendance.time_in DESC";
-                    $query = $conn->query($sql);
-                    $no = 1;
-                    while ($row = $query->fetch_assoc()) {
-                      $nonya = $no++;
-                      $disabled = "disabled";
-                      if ($nonya == 1) {
-                        $disabled = NULL;
-                      }
-                      $status = ($row['status']) ? '<span class="label label-warning pull-right">ontime</span>' : '<span class="label label-danger pull-right">late</span>';
-                      echo "
-                        <tr>
-                          <td class='hidden'></td>
-                          <td>" . date('M d, Y', strtotime($row['date'])) . "</td>
-                          <td>" . $row['empid'] . "</td>
-                          <td>" . $row['firstname'] . ' ' . $row['lastname'] . "</td>
-                          <td>" . date('h:i A', strtotime($row['time_in'])) . $status . "</td>
-                          <td>" . date('h:i A', strtotime($row['time_out'])) . "</td>
-                          <td>
-                            <button class='btn btn-danger btn-sm btn-flat delete' data-id='" . $row['attid'] . "' $disabled><i class='fa fa-trash'></i> Delete</button>
-                          </td>
-                        </tr>
-                      ";
-                    }
-                    ?>
-                  </tbody>
-                </table>
+                <form id="attendance">
+                  <div class="form-group">
+                    <select class="form-control" name="status">
+                      <option value="in">Time In</option>
+                      <option value="out">Time Out</option>
+                    </select>
+                  </div>
+                  <div class="form-group has-feedback">
+                    <input type="text" class="form-control input-lg" id="employee" name="employee" required readonly value="<?= $user['employee_id'] ?>">
+                    <i class="fa fa-user-plus form-control-feedback"></i>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-4">
+                      <button type="submit" class="btn btn-primary btn-block btn-flat" name="signin"><i class="fa fa-sign-in"></i> Absensi</button>
+                    </div>
+                  </div>
+                </form>
+                <div class="alert alert-success alert-dismissible mt20 text-center" style="display:none;">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  <span class="result"><i class="icon fa fa-check"></i> <span class="message"></span></span>
+                </div>
+                <div class="alert alert-danger alert-dismissible mt20 text-center" style="display:none;">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  <span class="result"><i class="icon fa fa-warning"></i> <span class="message"></span></span>
+                </div>
               </div>
             </div>
           </div>
@@ -133,10 +119,43 @@
           $('#attid').val(response.attid);
           $('#employee_name').html(response.firstname + ' ' + response.lastname);
           $('#del_attid').val(response.attid);
-          $('#del_employee_name').html(response.firstname + ' ' + response.lastname + ' : ' + response.date);
+          $('#del_employee_name').html(response.firstname + ' ' + response.lastname);
         }
       });
     }
+  </script>
+  <script type="text/javascript">
+    $(function() {
+      var interval = setInterval(function() {
+        var momentNow = moment();
+        $('#date').html(momentNow.format('dddd').substring(0, 3).toUpperCase() + ' - ' + momentNow.format('MMMM DD, YYYY'));
+        $('#time').html(momentNow.format('hh:mm:ss A'));
+      }, 100);
+
+      $('#attendance').submit(function(e) {
+        e.preventDefault();
+        var attendance = $(this).serialize();
+        $.ajax({
+          type: 'POST',
+          url: 'attendance_proses.php',
+          data: attendance,
+          dataType: 'json',
+          success: function(response) {
+            if (response.error) {
+              $('.alert').hide();
+              $('.alert-danger').show();
+              $('.message').html(response.message);
+            } else {
+              $('.alert').hide();
+              $('.alert-success').show();
+              $('.message').html(response.message);
+              // $('#employee').val('');
+            }
+          }
+        });
+      });
+
+    });
   </script>
 </body>
 
