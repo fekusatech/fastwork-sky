@@ -1,4 +1,5 @@
 <?php
+$serverIP = $_SERVER['SERVER_ADDR'];
 $isSSL = function () {
 	if (!empty($_SERVER['https']))
 		return true;
