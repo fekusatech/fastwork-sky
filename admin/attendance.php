@@ -101,6 +101,7 @@
   <script>
     $(function() {
       $('.edit').click(function(e) {
+        console.log("here",e)
         e.preventDefault();
         $('#edit').modal('show');
         var id = $(this).data('id');
