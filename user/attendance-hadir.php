@@ -55,6 +55,8 @@
                     <select class="form-control" name="status">
                       <option value="in">Time In</option>
                       <option value="out">Time Out</option>
+                      <option value="ijin">Ijin</option>
+                      <option value="sakit">Sakit</option>
                     </select>
                   </div>
                   <div class="form-group has-feedback">
