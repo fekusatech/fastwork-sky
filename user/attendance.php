@@ -43,6 +43,31 @@
           unset($_SESSION['success']);
         }
         ?>
+        <!-- Filter Form -->
+        <div class="row">
+          <div class="col-md-12">
+            <div class="box box-primary">
+              <div class="box-header with-border">
+                <h3 class="box-title">Filter Tanggal</h3>
+              </div>
+              <div class="box-body">
+                <form method="get" action="">
+                  <div class="form-group">
+                    <label for="tanggal_mulai">Tanggal Mulai:</label>
+                    <input type="date" class="form-control" id="tanggal_mulai" name="tanggal_mulai">
+                  </div>
+                  <div class="form-group">
+                    <label for="tanggal_selesai">Tanggal Selesai:</label>
+                    <input type="date" class="form-control" id="tanggal_selesai" name="tanggal_selesai">
+                  </div>
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Filter</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="row">
           <div class="col-xs-12">
             <div class="box">
@@ -58,11 +83,19 @@
                     <th>Nama</th>
                     <th>Time In</th>
                     <th>Time Out</th>
+                    <th>Keterangan</th>
                     <th>Tools</th>
                   </thead>
                   <tbody>
                     <?php
-                    $sql = "SELECT *, employees.employee_id AS empid, attendance.id AS attid FROM attendance LEFT JOIN employees ON employees.id=attendance.employee_id WHERE employees.employee_id = '{$user['employee_id']}' ORDER BY attendance.date DESC, attendance.time_in DESC";
+                    $sql = "SELECT *, employees.employee_id AS empid, attendance.id AS attid FROM attendance LEFT JOIN employees ON employees.id=attendance.employee_id WHERE employees.employee_id = '{$user['employee_id']}'";
+                    // Filter Tanggal
+                    if (isset($_GET['tanggal_mulai']) && isset($_GET['tanggal_selesai'])) {
+                      $tanggal_mulai = $_GET['tanggal_mulai'];
+                      $tanggal_selesai = $_GET['tanggal_selesai'];
+                      $sql .= " AND attendance.date BETWEEN '$tanggal_mulai' AND '$tanggal_selesai'";
+                    }
+                    $sql .= " ORDER BY attendance.date DESC, attendance.time_in DESC";
                     $query = $conn->query($sql);
                     $no = 1;
                     while ($row = $query->fetch_assoc()) {
@@ -80,6 +113,7 @@
                           <td>" . $row['firstname'] . ' ' . $row['lastname'] . "</td>
                           <td>" . date('h:i A', strtotime($row['time_in'])) . $status . "</td>
                           <td>" . date('h:i A', strtotime($row['time_out'])) . "</td>
+                          <td>" . ucwords($row['status_in']) . "</td>
                           <td>
                             <button class='btn btn-danger btn-sm btn-flat delete' data-id='" . $row['attid'] . "' $disabled><i class='fa fa-trash'></i> Delete</button>
                           </td>

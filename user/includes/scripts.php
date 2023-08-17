@@ -45,7 +45,8 @@
 <script>
   $(function () {
     $('#example1').DataTable({
-      responsive: true
+      responsive: true,
+      paging:false
     })
     $('#example2').DataTable({
       'paging'      : true,
