@@ -105,6 +105,7 @@
                         $disabled = NULL;
                       }
                       $status = ($row['status']) ? '<span class="label label-warning pull-right">ontime</span>' : '<span class="label label-danger pull-right">late</span>';
+                      $keterangan = $row['status_in'] === "in" ? '<span class="label label-success pull-right">Masuk</span>' : '<span class="label label-primary pull-right">'.ucwords($row['status_in']).'</span>';
                       echo "
                         <tr>
                           <td class='hidden'></td>
@@ -113,7 +114,6 @@
                           <td>" . $row['firstname'] . ' ' . $row['lastname'] . "</td>
                           <td>" . date('h:i A', strtotime($row['time_in'])) . $status . "</td>
                           <td>" . date('h:i A', strtotime($row['time_out'])) . "</td>
-                          <td>" . ucwords($row['status_in']) . "</td>
                           <td>
                             <button class='btn btn-danger btn-sm btn-flat delete' data-id='" . $row['attid'] . "' $disabled><i class='fa fa-trash'></i> Delete</button>
                           </td>

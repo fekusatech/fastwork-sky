@@ -43,6 +43,7 @@
           unset($_SESSION['success']);
         }
         ?>
+<<<<<<< HEAD
         <!-- Filter Form -->
         <div class="row">
           <div class="col-md-12">
@@ -68,6 +69,8 @@
             </div>
           </div>
         </div>
+=======
+>>>>>>> 62ee091e9f4e3bf5b1ca44bd7e7cc6b911364c93
         <div class="row">
           <div class="col-xs-12">
             <div class="box">
@@ -88,6 +91,7 @@
                   </thead>
                   <tbody>
                     <?php
+<<<<<<< HEAD
                     $sql = "SELECT *, employees.employee_id AS empid, attendance.id AS attid FROM attendance LEFT JOIN employees ON employees.id=attendance.employee_id ";
                     // Filter Tanggal
                     if (isset($_GET['tanggal_mulai']) && isset($_GET['tanggal_selesai'])) {
@@ -99,6 +103,13 @@
                     $query = $conn->query($sql);
                     while ($row = $query->fetch_assoc()) {
                       $status = ($row['status']) ? '<span class="label label-warning pull-right">ontime</span>' : '<span class="label label-danger pull-right">late</span>';
+=======
+                    $sql = "SELECT *, employees.employee_id AS empid, attendance.id AS attid FROM attendance LEFT JOIN employees ON employees.id=attendance.employee_id ORDER BY attendance.date DESC, attendance.time_in DESC";
+                    $query = $conn->query($sql);
+                    while ($row = $query->fetch_assoc()) {
+                      $status = ($row['status']) ? '<span class="label label-warning pull-right">ontime</span>' : '<span class="label label-danger pull-right">late</span>';
+                      $keterangan = $row['status_in'] === "in" ? '<span class="label label-success pull-right">Masuk</span>' : '<span class="label label-primary pull-right">' . ucwords($row['status_in']) . '</span>';
+>>>>>>> 62ee091e9f4e3bf5b1ca44bd7e7cc6b911364c93
                       echo "
                         <tr>
                           <td class='hidden'></td>
@@ -107,7 +118,11 @@
                           <td>" . $row['firstname'] . ' ' . $row['lastname'] . "</td>
                           <td>" . date('h:i A', strtotime($row['time_in'])) . $status . "</td>
                           <td>" . date('h:i A', strtotime($row['time_out'])) . "</td>
+<<<<<<< HEAD
                           <td>" . ucwords($row['status_in']) . "</td>
+=======
+                          <td>{$keterangan}</td>
+>>>>>>> 62ee091e9f4e3bf5b1ca44bd7e7cc6b911364c93
                           <td>
                             <button class='btn btn-success btn-sm btn-flat edit' data-id='" . $row['attid'] . "'><i class='fa fa-edit'></i> Edit</button>
                             <button class='btn btn-danger btn-sm btn-flat delete' data-id='" . $row['attid'] . "'><i class='fa fa-trash'></i> Delete</button>
@@ -132,6 +147,10 @@
   <script>
     $(function() {
       $('.edit').click(function(e) {
+<<<<<<< HEAD
+=======
+        console.log("here",e)
+>>>>>>> 62ee091e9f4e3bf5b1ca44bd7e7cc6b911364c93
         e.preventDefault();
         $('#edit').modal('show');
         var id = $(this).data('id');

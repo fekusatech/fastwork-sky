@@ -18,6 +18,8 @@
       <li><a href="cuti.php"><i class="fa fa-calendar-plus-o"></i> <span>Ajukan Cuti</span></a></li>
       <li><a href="attendance-hadir.php"><i class="fa fa-user-plus"></i> <span>Absesensi</span></a></li>
       <li><a href="attendance.php"><i class="fa fa-calendar"></i> <span>Daftar Attendance</span></a></li>
+      <li><a href="employee.php"><i class="fa fa-clock-o"></i> <span>Jadwal Kerja</span></a></li>
+      <li><a href="payroll.php"><i class="fa fa-usd"></i> <span>Daftar Gaji</span></a></li>
       <!-- <li class="treeview">
         <a href="#">
           <i class="fa fa-users"></i>

@@ -10,10 +10,17 @@
           	<div class="modal-body">
             	<form class="form-horizontal" method="POST" action="profile_update.php?return=<?php echo basename($_SERVER['PHP_SELF']); ?>" enctype="multipart/form-data">
                 <div class="form-group">
-                    <label for="password" class="col-sm-3 control-label">Password</label>
+                    <label for="password" class="col-sm-3 control-label">Password Baru</label>
 
                     <div class="col-sm-9"> 
                       <input type="password" class="form-control" id="password" name="password" value="<?php echo $_SESSION['data']['password']; ?>">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="curr_password" class="col-sm-3 control-label">Password Sekarang</label>
+
+                    <div class="col-sm-9">
+                      <input type="password" class="form-control" id="curr_password" name="curr_password" placeholder="Masukkan Password anda sekarang untuk proteksi" required>
                     </div>
                 </div>
                 <div class="form-group">
@@ -35,14 +42,6 @@
 
                     <div class="col-sm-9">
                       <input type="file" id="photo" name="photo">
-                    </div>
-                </div>
-                <hr>
-                <div class="form-group">
-                    <label for="curr_password" class="col-sm-3 control-label">Current Password:</label>
-
-                    <div class="col-sm-9">
-                      <input type="password" class="form-control" id="curr_password" name="curr_password" placeholder="input current password to save changes" required>
                     </div>
                 </div>
           	</div>

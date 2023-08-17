@@ -14,7 +14,7 @@
 	$from_title = date('M d, Y', strtotime($ex[0]));
 	$to_title = date('M d, Y', strtotime($ex[1]));
 
-	require_once('../tcpdf/tcpdf.php');  
+	require_once('../TCPDF/tcpdf.php');  
     $pdf = new TCPDF('P', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);  
     $pdf->SetCreator(PDF_CREATOR);  
     $pdf->SetTitle('Payslip: '.$from_title.' - '.$to_title);  
@@ -31,7 +31,7 @@
     $pdf->AddPage(); 
     $contents = '';
 
-	$sql = "SELECT *, SUM(num_hr) AS total_hr, attendance.employee_id AS empid, employees.employee_id AS employee FROM attendance LEFT JOIN employees ON employees.id=attendance.employee_id LEFT JOIN position ON position.id=employees.position_id WHERE date BETWEEN '$from' AND '$to' GROUP BY attendance.employee_id ORDER BY employees.lastname ASC, employees.firstname ASC";
+	$sql = "SELECT *, SUM(num_hr) AS total_hr, attendance.employee_id AS empid, employees.employee_id AS employee FROM attendance LEFT JOIN employees ON employees.id=attendance.employee_id LEFT JOIN position ON position.id=employees.position_id WHERE date BETWEEN '$from' AND '$to' and employees.id = '{$user['id']}'  GROUP BY attendance.employee_id ORDER BY employees.lastname ASC, employees.firstname ASC";
 
 	$query = $conn->query($sql);
 	while($row = $query->fetch_assoc()){
