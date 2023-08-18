@@ -39,7 +39,7 @@
       <li><a href="position.php"><i class="fa fa-suitcase"></i> Posisi</a></li>
       <li class="header">Cetak</li>
       <li><a href="payroll.php"><i class="fa fa-files-o"></i> <span>Daftar gaji</span></a></li>
-      <li><a href="schedule_employee.php"><i class="fa fa-clock-o"></i> <span>Jadwal Karja</span></a></li> -->
+      <li><a href="schedule_employee.php"><i class="fa fa-clock-o"></i> <span>Jadwal Kerja</span></a></li> -->
     </ul>
   </section>
   <!-- /.sidebar -->
