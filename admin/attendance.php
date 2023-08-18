@@ -53,14 +53,15 @@
                 <form method="get" action="">
                   <div class="form-group">
                     <label for="tanggal_mulai">Tanggal Mulai:</label>
-                    <input type="date" class="form-control" id="tanggal_mulai" name="tanggal_mulai">
+                    <input type="date" class="form-control" id="tanggal_mulai" name="tanggal_mulai" value="<?= isset($_GET['tanggal_mulai']) ? $_GET['tanggal_mulai'] : date('Y-m-d') ?>">
                   </div>
                   <div class="form-group">
                     <label for="tanggal_selesai">Tanggal Selesai:</label>
-                    <input type="date" class="form-control" id="tanggal_selesai" name="tanggal_selesai">
+                    <input type="date" class="form-control" id="tanggal_selesai" name="tanggal_selesai" value="<?= isset($_GET['tanggal_selesai']) ? $_GET['tanggal_selesai'] : date('Y-m-d') ?>">
                   </div>
                   <div class="form-group">
                     <button type="submit" class="btn btn-primary">Filter</button>
+                    <a href="#" class="btn btn-success" onclick="cetakabsen()" type="button"><i class="fa fa-print"></i> Cetak</a>
                   </div>
                 </form>
               </div>
@@ -164,6 +165,29 @@
           $('#del_employee_name').html(response.firstname + ' ' + response.lastname);
         }
       });
+    }
+
+    function cetakabsen() {
+      var tanggal_mulai = $("#tanggal_mulai").val();
+      var tanggal_selesai = $("#tanggal_selesai").val();
+      var id_employee = "<?= $_SESSION['data']['id']; ?>";
+      // Menggunakan parameter query string
+      var url = "<?= $base_url ?>attendance_cetak.php?date_range=" + tanggal_mulai + ' - ' + tanggal_selesai;
+      console.log(url);
+      // Membuat elemen <a> yang tidak terlihat untuk memicu unduhan
+      var downloadLink = document.createElement("a");
+      downloadLink.href = url;
+      downloadLink.target = "_blank"; // Buka di tab baru jika diinginkan
+      downloadLink.download = "attendance.pdf"; // Nama file unduhan
+
+      // Menambahkan elemen <a> ke dalam dokumen
+      document.body.appendChild(downloadLink);
+
+      // Memicu klik pada elemen <a> untuk memulai unduhan
+      downloadLink.click();
+
+      // Menghapus elemen <a> setelah klik
+      document.body.removeChild(downloadLink);
     }
   </script>
 </body>

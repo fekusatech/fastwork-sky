@@ -54,11 +54,11 @@
                 <form method="get" action="">
                   <div class="form-group">
                     <label for="tanggal_mulai">Tanggal Mulai:</label>
-                    <input type="date" class="form-control" id="tanggal_mulai" name="tanggal_mulai">
+                    <input type="date" class="form-control" id="tanggal_mulai" name="tanggal_mulai" value="<?= isset($_GET['tanggal_mulai']) ? $_GET['tanggal_mulai'] : date('Y-m-d') ?>">
                   </div>
                   <div class="form-group">
                     <label for="tanggal_selesai">Tanggal Selesai:</label>
-                    <input type="date" class="form-control" id="tanggal_selesai" name="tanggal_selesai">
+                    <input type="date" class="form-control" id="tanggal_selesai" name="tanggal_selesai" value="<?= isset($_GET['tanggal_selesai']) ? $_GET['tanggal_selesai'] : date('Y-m-d') ?>">
                   </div>
                   <div class="form-group">
                     <button type="submit" class="btn btn-primary">Filter</button>
@@ -105,7 +105,7 @@
                         $disabled = NULL;
                       }
                       $status = ($row['status']) ? '<span class="label label-warning pull-right">ontime</span>' : '<span class="label label-danger pull-right">late</span>';
-                      $keterangan = $row['status_in'] === "in" ? '<span class="label label-success pull-right">Masuk</span>' : '<span class="label label-primary pull-right">'.ucwords($row['status_in']).'</span>';
+                      $keterangan = $row['status_in'] === "in" ? '<span class="label label-success pull-right">Masuk</span>' : '<span class="label label-primary pull-right">' . ucwords($row['status_in']) . '</span>';
                       echo "
                         <tr>
                           <td class='hidden'></td>

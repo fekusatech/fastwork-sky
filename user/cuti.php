@@ -44,6 +44,32 @@
                 }
                 ?>
                 <div class="row">
+                    <div class="col-md-12">
+                        <div class="box box-primary">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Filter Tanggal</h3>
+                            </div>
+                            <div class="box-body">
+                                <form method="get" action="">
+                                    <div class="form-group">
+                                        <label for="tanggal_mulai">Tanggal Mulai:</label>
+                                        <input type="date" class="form-control" id="tanggal_mulai" name="tanggal_mulai" value="<?= isset($_GET['tanggal_mulai']) ? $_GET['tanggal_mulai'] : date('Y-m-d') ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="tanggal_selesai">Tanggal Selesai:</label>
+                                        <input type="date" class="form-control" id="tanggal_selesai" name="tanggal_selesai" value="<?= isset($_GET['tanggal_selesai']) ? $_GET['tanggal_selesai'] : date('Y-m-d') ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary">Filter</button>
+                                        <!-- <a href="cuti_cetak.php" class="btn btn-success" onclick="cetakcuti()" type="button"><i class="fa fa-print"></i> Cetak</a> -->
+                                        <a href="#" class="btn btn-success" onclick="cetakcuti()" type="button"><i class="fa fa-print"></i> Cetak</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-xs-12">
                         <!-- Tombol untuk membuka modal pengajuan cuti -->
                         <!-- Tabel daftar cuti Anda di sini -->
@@ -65,8 +91,14 @@
                                         <?php
                                         $sql = "SELECT leave_requests.*, employees.firstname, employees.lastname
                                                 FROM leave_requests
-                                                JOIN employees ON leave_requests.user_id = employees.id WHERE leave_requests.user_id = '{$_SESSION['data']['id']}'
-                                                ORDER BY leave_requests.start_date DESC";
+                                                INNER JOIN employees ON leave_requests.user_id = employees.id WHERE leave_requests.user_id = '{$_SESSION['data']['id']}'
+                                                ";
+                                        if (isset($_GET['tanggal_mulai']) && isset($_GET['tanggal_selesai'])) {
+                                            $tanggal_mulai = $_GET['tanggal_mulai'];
+                                            $tanggal_selesai = $_GET['tanggal_selesai'];
+                                            $sql .= " AND leave_requests.start_date BETWEEN '$tanggal_mulai' AND '$tanggal_selesai' ";
+                                        }
+                                        $sql .= "ORDER BY leave_requests.start_date DESC";
                                         $query = $conn->query($sql);
                                         while ($row = $query->fetch_assoc()) {
                                             if ($row['status'] == "pending") {
@@ -137,6 +169,29 @@
         function confirmAction(action) {
             var confirmationMessage = "Apakah Anda yakin ingin " + (action === "approve" ? "menyetujui" : "menolak") + " permintaan cuti ini?";
             return confirm(confirmationMessage);
+        }
+
+        function cetakcuti() {
+            var tanggal_mulai = $("#tanggal_mulai").val();
+            var tanggal_selesai = $("#tanggal_selesai").val();
+            var id_employee = "<?= $_SESSION['data']['id']; ?>";
+            // Menggunakan parameter query string
+            var url = "<?= $base_url ?>cuti_cetak.php?date_range=" + tanggal_mulai + ' - ' + tanggal_selesai + '&id_employee=' + id_employee;
+
+            // Membuat elemen <a> yang tidak terlihat untuk memicu unduhan
+            var downloadLink = document.createElement("a");
+            downloadLink.href = url;
+            downloadLink.target = "_blank"; // Buka di tab baru jika diinginkan
+            downloadLink.download = "cuti.pdf"; // Nama file unduhan
+
+            // Menambahkan elemen <a> ke dalam dokumen
+            document.body.appendChild(downloadLink);
+
+            // Memicu klik pada elemen <a> untuk memulai unduhan
+            downloadLink.click();
+
+            // Menghapus elemen <a> setelah klik
+            document.body.removeChild(downloadLink);
         }
     </script>
 </body>
