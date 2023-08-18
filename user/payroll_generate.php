@@ -74,9 +74,9 @@
       	<h4 align="center">'.$from_title." - ".$to_title.'</h4>
       	<table border="1" cellspacing="0" cellpadding="3">  
            <tr>  
-           		<th width="40%" align="center"><b>Employee Name</b></th>
-                <th width="30%" align="center"><b>Employee ID</b></th>
-				<th width="30%" align="center"><b>Net Pay</b></th> 
+           		<th width="40%" align="center"><b>Nama Karyawan</b></th>
+                <th width="30%" align="center"><b>ID Karyawan</b></th>
+				<th width="30%" align="center"><b>Gaji Bersih</b></th> 
            </tr>  
       ';  
     $content .= generateRow($from, $to, $conn, $deduction);  

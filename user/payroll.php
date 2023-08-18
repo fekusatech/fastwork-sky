@@ -69,7 +69,7 @@
                 <thead>
                   <th>Nama Karyawan</th>
                   <th>ID Karyawan</th>
-                  <th>Bruto</th>
+                  <th>Gaji Kotor</th>
                   <th>Asuransi</th>
                   <th>Pinjaman</th>
                   <th>Gaji bersih</th>

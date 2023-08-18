@@ -99,7 +99,7 @@ if (isset($_POST['employee'])) {
 		}
 	} else {
 		$output['error'] = true;
-		$output['message'] = 'Employee ID not found';
+		$output['message'] = 'ID Karyawan not found';
 	}
 }
 
