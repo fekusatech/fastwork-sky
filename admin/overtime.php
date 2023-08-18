@@ -11,12 +11,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Overtime
+        Lembur
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li>Karyawan</li>
-        <li class="active">Overtime</li>
+        <li class="active">Lembur</li>
       </ol>
     </section>
     <!-- Main content -->
@@ -56,8 +56,8 @@
                   <th>Tanggal</th>
                   <th>ID Karyawan</th>
                   <th>Nama</th>
-                  <th>No. of Hours</th>
-                  <th>Rate</th>
+                  <th>Jam Lembur</th>
+                  <th>Upah</th>
                   <th>Tools</th>
                 </thead>
                 <tbody>

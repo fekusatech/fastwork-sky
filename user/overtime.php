@@ -56,7 +56,7 @@
                   <th>Tanggal</th>
                   <th>ID Karyawan</th>
                   <th>Nama</th>
-                  <th>No. of Hours</th>
+                  <th>Jam Lembur</th>
                   <th>Rate</th>
                   <th>Tools</th>
                 </thead>
