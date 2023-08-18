@@ -57,7 +57,7 @@
                   <th>ID Karyawan</th>
                   <th>Nama</th>
                   <th>Jumlah</th>
-                  <th>Tools</th>
+                  <th>Aksi</th>
                 </thead>
                 <tbody>
                   <?php

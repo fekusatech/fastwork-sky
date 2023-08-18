@@ -51,9 +51,9 @@
             <div class="box-body">
               <table id="example1" class="table table-bordered">
                 <thead>
-                  <th>Position Title</th>
-                  <th>Rate per Hour</th>
-                  <th>Tools</th>
+                  <th>Jabatan</th>
+                  <th>Upah per jam</th>
+                  <th>Aksi</th>
                 </thead>
                 <tbody>
                   <?php

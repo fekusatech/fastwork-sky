@@ -59,8 +59,8 @@
                     </div>
                     <input type="text" class="form-control pull-right col-sm-8" id="reservation" name="date_range" value="<?php echo (isset($_GET['range'])) ? $_GET['range'] : $range_from.' - '.$range_to; ?>">
                   </div>
-                  <button type="button" class="btn btn-success btn-sm btn-flat" id="payroll"><span class="glyphicon glyphicon-print"></span> Payroll</button>
-                  <button type="button" class="btn btn-primary btn-sm btn-flat" id="payslip"><span class="glyphicon glyphicon-print"></span> Payslip</button>
+                  <button type="button" class="btn btn-success btn-sm btn-flat" id="payroll"><span class="glyphicon glyphicon-print"></span> Daftar Gaji</button>
+                  <button type="button" class="btn btn-primary btn-sm btn-flat" id="payslip"><span class="glyphicon glyphicon-print"></span> Slip Gaji</button>
                 </form>
               </div>
             </div>
@@ -69,8 +69,8 @@
                 <thead>
                   <th>Nama Karyawan</th>
                   <th>ID Karyawan</th>
-                  <th>Gross</th>
-                  <th>Deductions</th>
+                  <th>Bruto</th>
+                  <th>Asuransi</th>
                   <th>Pinjaman</th>
                   <th>Gaji bersih</th>
                 </thead>

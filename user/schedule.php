@@ -54,7 +54,7 @@
                 <thead>
                   <th>Time In</th>
                   <th>Time Out</th>
-                  <th>Tools</th>
+                  <th>Aksi</th>
                 </thead>
                 <tbody>
                   <?php

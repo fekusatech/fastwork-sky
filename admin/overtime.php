@@ -58,7 +58,7 @@
                   <th>Nama</th>
                   <th>Jam Lembur</th>
                   <th>Upah</th>
-                  <th>Tools</th>
+                  <th>Aksi</th>
                 </thead>
                 <tbody>
                   <?php

@@ -54,7 +54,7 @@
                   <th>ID Karyawan</th>
                   <th>Photo</th>
                   <th>Nama</th>
-                  <th>Position</th>
+                  <th>Posisi</th>
                   <th>Jadwal Kerja</th>
                   <th>Tanggal Masuk</th>
                 </thead>

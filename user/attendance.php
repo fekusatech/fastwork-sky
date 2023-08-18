@@ -84,7 +84,7 @@
                     <th>Time In</th>
                     <th>Time Out</th>
                     <th>Keterangan</th>
-                    <th>Tools</th>
+                    <th>Aksi</th>
                   </thead>
                   <tbody>
                     <?php
