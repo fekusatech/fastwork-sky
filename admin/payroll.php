@@ -72,7 +72,7 @@ $range_from = date('m/d/Y', strtotime('-30 day', strtotime($range_to)));
                     <th>ID Karyawan</th>
                     <th>Gross</th>
                     <th>Deductions</th>
-                    <th>Cash Advance</th>
+                    <th>Pinjaman</th>
                     <th>Lembur</th>
                     <th>Gaji bersih</th>
                   </thead>

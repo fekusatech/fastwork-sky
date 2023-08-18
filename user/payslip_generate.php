@@ -78,7 +78,7 @@
     	    	<tr> 
     	    		<td></td> 
     	    		<td></td>
-				 	<td width="25%" align="right">Cash Advance: </td>
+				 	<td width="25%" align="right">Pinjaman: </td>
 				 	<td width="25%" align="right">'.number_format($cashadvance, 2).'</td> 
     	    	</tr>
     	    	<tr> 

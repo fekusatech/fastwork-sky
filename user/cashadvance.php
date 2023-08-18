@@ -11,12 +11,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Cash Advance
+        Pinjaman
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li>Karyawan</li>
-        <li class="active">Cash Advance</li>
+        <li class="active">Pinjaman</li>
       </ol>
     </section>
     <!-- Main content -->
@@ -56,7 +56,7 @@
                   <th>Tanggal</th>
                   <th>ID Karyawan</th>
                   <th>Nama</th>
-                  <th>JUmlah</th>
+                  <th>Jumlah</th>
                   <th>Tools</th>
                 </thead>
                 <tbody>

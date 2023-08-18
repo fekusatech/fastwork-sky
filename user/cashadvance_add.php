@@ -15,7 +15,7 @@
 			$employee_id = $row['id'];
 			$sql = "INSERT INTO cashadvance (employee_id, date_advance, amount) VALUES ('$employee_id', NOW(), '$amount')";
 			if($conn->query($sql)){
-				$_SESSION['success'] = 'Cash Advance added successfully';
+				$_SESSION['success'] = 'Pinjaman added successfully';
 			}
 			else{
 				$_SESSION['error'] = $conn->error;

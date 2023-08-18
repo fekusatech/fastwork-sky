@@ -5,7 +5,7 @@
           	<div class="modal-header">
             	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
               		<span aria-hidden="true">&times;</span></button>
-            	<h4 class="modal-title"><b>Add Cash Advance</b></h4>
+            	<h4 class="modal-title"><b>Add Pinjaman</b></h4>
           	</div>
           	<div class="modal-body">
             	<form class="form-horizontal" method="POST" action="cashadvance_add.php">
@@ -75,7 +75,7 @@
             	<form class="form-horizontal" method="POST" action="cashadvance_delete.php">
             		<input type="hidden" class="caid" name="id">
             		<div class="text-center">
-	                	<p>DELETE CASH ADVANCE</p>
+	                	<p>DELETE Pinjaman</p>
 	                	<h2 class="employee_name bold"></h2>
 	            	</div>
           	</div>

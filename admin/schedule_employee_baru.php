@@ -55,22 +55,62 @@
                   <thead>
                     <th>ID Karyawan</th>
                     <th>Nama</th>
+                    <th>Tanggal</th>
                     <th>Jadwal Kerja</th>
                     <th>Tools</th>
                   </thead>
                   <tbody>
                     <?php
+                    $today = new DateTime(); // Tanggal sekarang
+                    $weekdays = array(1, 2, 3, 4, 5); // 1 = Senin, 2 = Selasa, dst.
+
+                    $dateList = array();
+
+                    // Cari hari Senin pertama dalam minggu ini
+                    $monday = clone $today;
+                    $monday->modify('last monday');
+
+                    // Buat daftar tanggal dari Senin hingga Jumat dalam minggu ini
+                    for ($i = 0; $i < 5; $i++) {
+                      $currentDate = clone $monday;
+                      $currentDate->add(new DateInterval('P' . $i . 'D')); // Tambahkan offset hari
+
+                      // Jika hari saat ini adalah hari kerja, tambahkan ke daftar
+                      if (in_array($currentDate->format('N'), $weekdays)) {
+                        $dateList[] = $currentDate->format('Y-m-d');
+                      }
+                    }
                     $sql = "SELECT *, employees.id AS empid FROM employees LEFT JOIN schedules ON schedules.id=employees.schedule_id";
                     $query = $conn->query($sql);
+                    $no = 0;
+                    $datakaryawan = [];
                     while ($row = $query->fetch_assoc()) {
-                      $data[] = $row;
+                      $datakaryawan[] = $row;
+                    }
+
+                    foreach ($datakaryawan as $employee) {
+                      foreach ($dateList as $date) {
+                        $newEmployee = $employee;
+                        $newEmployee["time_in"] = $date . " " . $employee["time_in"];
+                        $newEmployee["time_out"] = $date . " " . $employee["time_out"];
+                        $newEmployeeData[] = $newEmployee;
+                      }
+                    }
+
+                    // Tampilkan hasil
+                    echo "<pre>";
+                    print_r($newEmployeeData);
+                    echo "</pre>";
+                    exit;
+                    foreach ($data as $rows) {
                       echo "
                         <tr>
-                          <td>" . $row['employee_id'] . "</td>
-                          <td>" . $row['firstname'] . ' ' . $row['lastname'] . "</td>
-                          <td>" . date('h:i A', strtotime($row['time_in'])) . ' - ' . date('h:i A', strtotime($row['time_out'])) . "</td>
+                          <td>" . $rows['employee_id'] . json_encode($rows) . "</td>
+                          <td>" . $rows['firstname'] . ' ' . $rows['lastname'] . "</td>
+                          <td>" . date('d M Y', strtotime($rows['time_in'])) . "</td>
+                          <td>" . date('h:i A', strtotime($rows['time_in'])) . ' - ' . date('h:i A', strtotime($rows['time_out'])) . "</td>
                           <td>
-                            <button class='btn btn-success btn-sm edit btn-flat' data-id='" . $row['empid'] . "'><i class='fa fa-edit'></i> Edit</button>
+                            <button class='btn btn-success btn-sm edit btn-flat' data-id='" . $rows['empid'] . "'><i class='fa fa-edit'></i> Edit</button>
                             </td>
                             </tr>
                             ";

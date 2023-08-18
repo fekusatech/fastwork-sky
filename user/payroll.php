@@ -71,7 +71,7 @@
                   <th>ID Karyawan</th>
                   <th>Gross</th>
                   <th>Deductions</th>
-                  <th>Cash Advance</th>
+                  <th>Pinjaman</th>
                   <th>Gaji bersih</th>
                 </thead>
                 <tbody>

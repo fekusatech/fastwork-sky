@@ -31,7 +31,7 @@
         <ul class="treeview-menu">
           <li><a href="employee.php"><i class="fa fa-circle-o"></i> List Karyawan</a></li>
           <li><a href="overtime.php"><i class="fa fa-circle-o"></i> Lembur</a></li>
-          <li><a href="cashadvance.php"><i class="fa fa-circle-o"></i> Uang Muka</a></li>
+          <li><a href="cashadvance.php"><i class="fa fa-circle-o"></i> Pinjaman</a></li>
           <li><a href="schedule.php"><i class="fa fa-circle-o"></i> Jadwal Kerja</a></li>
         </ul>
       </li>
