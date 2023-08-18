@@ -34,7 +34,7 @@
           <li><a href="schedule.php"><i class="fa fa-circle-o"></i> Jadwal Kerja</a></li>
         </ul>
       </li>
-      <li><a href="deduction.php"><i class="fa fa-file-text"></i> Pengurangan</a></li>
+      <li><a href="deduction.php"><i class="fa fa-file-text"></i> Asuransi</a></li>
       <li><a href="position.php"><i class="fa fa-suitcase"></i> Posisi</a></li>
       <li class="header">Cetak</li>
       <li><a href="payroll.php"><i class="fa fa-files-o"></i> <span>Daftar gaji</span></a></li>
