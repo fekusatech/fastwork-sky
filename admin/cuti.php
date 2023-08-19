@@ -155,7 +155,7 @@
                                 <label for="employee_id">Pilih Karyawan:</label>
                                 <select class="form-control" id="employee_id" name="employee_id" required>
                                     <?php
-                                    $sql = "SELECT e.*, 21-IFNULL((SELECT sum(datediff(end_date,start_date)) from leave_requests where user_id = e.id and status ='approved' ),0) as sisa_cuti from employees e";
+                                    $sql = "SELECT e.*, (select jatah_cuti from employees where id=e.id)-IFNULL((SELECT sum(datediff(end_date,start_date)) from leave_requests where user_id = e.id and status ='approved' ),0) as sisa_cuti from employees e";
                                     $query = $conn->query($sql);
                                     while ($row = $query->fetch_assoc()) {
                                         // Dapatkan sisa cuti karyawan

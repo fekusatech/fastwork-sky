@@ -1,5 +1,11 @@
 <?php include 'includes/session.php'; ?>
-<?php include 'includes/header.php'; ?>
+<?php include 'includes/header.php';
+$sql = "SELECT (select jatah_cuti from employees where id='{$user['id']}')-IFNULL((SELECT sum(datediff(end_date,start_date)) from leave_requests where user_id = '{$user['id']}' and status ='approved' ),0) as sisa_cuti from employees e where e.id = {$user['id']}";
+$query = $conn->query($sql);
+$datacuti = $query->fetch_assoc();
+$sisacuti = $datacuti['sisa_cuti'];
+
+?>
 
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
@@ -85,6 +91,7 @@
                                             <th>Tanggal Mulai</th>
                                             <th>Tanggal Selesai</th>
                                             <th>Status</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -100,6 +107,7 @@
                                         }
                                         $sql .= "ORDER BY leave_requests.start_date DESC";
                                         $query = $conn->query($sql);
+                                        $printbutton = "";
                                         while ($row = $query->fetch_assoc()) {
                                             if ($row['status'] == "pending") {
                                                 $status = "<span class='label label-primary badge-pill'>" . ucwords($row['status']) . "</span>";
@@ -107,6 +115,7 @@
                                                 $status = "<span class='label label-danger badge-pill'>" . ucwords($row['status']) . "</span>";
                                             } else {
                                                 $status = "<span class='label label-success badge-pill'>" . ucwords($row['status']) . "</span>";
+                                                $printbutton = "<a href='#' class='btn btn-xs btn-primary' onclick='cetakcutiform(`{$row['id']}`)' type='button'><i class='fa fa-print'></i> Cetak</a>";
                                             }
                                             echo "
                                                 <tr>
@@ -114,6 +123,7 @@
                                                 <td>" . date('M d, Y', strtotime($row['start_date'])) . "</td>
                                                 <td>" . date('M d, Y', strtotime($row['end_date'])) . "</td>
                                                 <td>" . $status . "</td>
+                                                <td>" . $printbutton . "</td>
                                                 </tr>
                                             ";
                                         }
@@ -143,6 +153,10 @@
                             <input class="form-control" value="<?= $_SESSION['data']['id'] ?>" id="employee_id" name="employee_id" type="hidden" required>
                             <input class="form-control" value="pending" id="status" name="status" type="hidden" required>
                             <div class="form-group">
+                                <label for="tanggal_mulai">Sisa Cuti:</label>
+                                <input type="number" class="form-control" id="" value="<?= $sisacuti ?>" readonly required>
+                            </div>
+                            <div class="form-group">
                                 <label for="tanggal_mulai">Tanggal Mulai:</label>
                                 <input type="date" class="form-control" id="tanggal_mulai" name="tanggal_mulai" required>
                             </div>
@@ -154,7 +168,11 @@
                                 <label for="alasan">Alasan Cuti:</label>
                                 <textarea class="form-control" id="alasan" name="alasan" rows="3" required></textarea>
                             </div>
-                            <button type="submit" class="btn btn-primary">Ajukan Cuti</button>
+                            <?php if ($sisacuti < 1) { ?>
+                                <button type="button" class="btn btn-primary" onclick="alert(`Sisa cuti anda <?= $sisacuti ?>`)">Ajukan Cuti</button>
+                            <?php } else { ?>
+                                <button type="submit" class="btn btn-primary">Ajukan Cuti</button>
+                            <?php } ?>
                         </form>
                     </div>
                 </div>
@@ -183,6 +201,26 @@
             downloadLink.href = url;
             downloadLink.target = "_blank"; // Buka di tab baru jika diinginkan
             downloadLink.download = "cuti.pdf"; // Nama file unduhan
+
+            // Menambahkan elemen <a> ke dalam dokumen
+            document.body.appendChild(downloadLink);
+
+            // Memicu klik pada elemen <a> untuk memulai unduhan
+            downloadLink.click();
+
+            // Menghapus elemen <a> setelah klik
+            document.body.removeChild(downloadLink);
+        }
+
+        function cetakcutiform(id) {
+            // Menggunakan parameter query string
+            var url = "<?= $base_url ?>cuti_template.php?id=" + id;
+
+            // Membuat elemen <a> yang tidak terlihat untuk memicu unduhan
+            var downloadLink = document.createElement("a");
+            downloadLink.href = url;
+            downloadLink.target = "_blank"; // Buka di tab baru jika diinginkan
+            downloadLink.download = "form-cuti.pdf"; // Nama file unduhan
 
             // Menambahkan elemen <a> ke dalam dokumen
             document.body.appendChild(downloadLink);

@@ -128,6 +128,8 @@ function getRow(id){
       $('#edit_address').val(response.address);
       $('#datepicker_edit').val(response.birthdate);
       $('#edit_contact').val(response.contact_info);
+      $('#edit_jatah_cuti').val(response.jatah_cuti);
+      $('#gender_val').val(response.gender).html(response.gender);
       $('#gender_val').val(response.gender).html(response.gender);
       $('#position_val').val(response.position_id).html(response.description);
       $('#schedule_val').val(response.schedule_id).html(response.time_in+' - '+response.time_out);
