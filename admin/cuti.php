@@ -84,8 +84,8 @@
                                             <th>Nama Karyawan</th>
                                             <th>Tanggal Mulai</th>
                                             <th>Tanggal Selesai</th>
-                                            <th>Alasan</th>
                                             <th>Status</th>
+                                            <th>Alasan</th>
                                             <th>Tindakan</th> <!-- Kolom untuk tindakan approve -->
                                         </tr>
                                     </thead>
@@ -101,22 +101,24 @@
                                             $sql .= " WHERE leave_requests.start_date BETWEEN '$tanggal_mulai' AND '$tanggal_selesai' OR leave_requests.end_date BETWEEN '$tanggal_mulai' AND '$tanggal_selesai' ";
                                         }
                                         $sql .= "ORDER BY leave_requests.start_date DESC";
-                                        // echo $sql; exit;    ?   
                                         $query = $conn->query($sql);
+                                        $printbutton = "";
                                         while ($row = $query->fetch_assoc()) {
                                             if ($row['status'] == "pending") {
                                                 $status = "<span class='label label-primary badge-pill'>" . ucwords($row['status']) . "</span>";
-                                                $approve_button = "<a href='cuti_approve.php?id=" . $row['id'] . "&action=approve' class='btn btn-success btn-sm' onclick='return confirmAction(\"approve\")'>Approve</a>&nbsp;";
-                                                $approve_button .= "<a href='cuti_approve.php?id=" . $row['id'] . "&action=reject' class='btn btn-danger btn-sm' onclick='return confirmAction(\"reject\")'>Reject</a>";
+                                                $approve_button = "<a href='cuti_approve.php?id=" . $row['id'] . "&action=approve' class='btn btn-xs btn-success btn-sm' onclick='return confirmAction(\"approve\")'>Approve</a>&nbsp;";
+                                                $approve_button .= "<a href='cuti_approve.php?id=" . $row['id'] . "&action=reject' class='btn btn-xs btn-danger btn-sm' onclick='return confirmAction(\"reject\")'>Reject</a>";
                                             } else if ($row['status'] == "rejected") {
                                                 $status = "<span class='label label-danger badge-pill'>" . ucwords($row['status']) . "</span>";
-                                                $approve_button = "<a href='#' disabled class='btn btn-success btn-sm'>Approve</a>&nbsp;";
-                                                $approve_button .= "<a href='#' disabled class='btn btn-danger btn-sm'>Reject</a>";
+                                                $approve_button = "<a href='#' disabled class='btn btn-xs btn-success btn-sm'>Approve</a>&nbsp;";
+                                                $approve_button .= "<a href='#' disabled class='btn btn-xs btn-danger btn-sm'>Reject</a>";
                                             } else {
                                                 $status = "<span class='label label-success badge-pill'>" . ucwords($row['status']) . "</span>";
-                                                $approve_button = "<a href='#' disabled class='btn btn-success btn-sm'>Approve</a>&nbsp;";
-                                                $approve_button .= "<a href='#' disabled class='btn btn-danger btn-sm'>Reject</a>";
+                                                $approve_button = "<a href='#' disabled class='btn btn-xs btn-success btn-sm'>Approve</a>&nbsp;";
+                                                $approve_button .= "<a href='#' disabled class='btn btn-xs btn-danger btn-sm'>Reject</a>";
                                             }
+                                            $printbutton = "<a href='#' class='btn btn-xs btn-primary' onclick='cetakcutiform(`{$row['id']}`)' type='button'><i class='fa fa-print'></i> Cetak</a>";
+
                                             echo "
                                                 <tr>
                                                 <td>" . $row['firstname'] . " " . $row['lastname'] . "</td>
@@ -124,7 +126,7 @@
                                                 <td>" . date('M d, Y', strtotime($row['end_date'])) . "</td>
                                                 <td>" . $status . "</td>
                                                 <td>" . $row['keterangan'] . "</td>
-                                                <td>" . $approve_button . "</td>
+                                                <td>" . $approve_button . "&nbsp; $printbutton</td>
                                                 </tr>
                                             ";
                                         }
@@ -213,6 +215,26 @@
             downloadLink.href = url;
             downloadLink.target = "_blank"; // Buka di tab baru jika diinginkan
             downloadLink.download = "cuti.pdf"; // Nama file unduhan
+
+            // Menambahkan elemen <a> ke dalam dokumen
+            document.body.appendChild(downloadLink);
+
+            // Memicu klik pada elemen <a> untuk memulai unduhan
+            downloadLink.click();
+
+            // Menghapus elemen <a> setelah klik
+            document.body.removeChild(downloadLink);
+        }
+
+        function cetakcutiform(id) {
+            // Menggunakan parameter query string
+            var url = "<?= $base_url ?>cuti_template.php?id=" + id;
+
+            // Membuat elemen <a> yang tidak terlihat untuk memicu unduhan
+            var downloadLink = document.createElement("a");
+            downloadLink.href = url;
+            downloadLink.target = "_blank"; // Buka di tab baru jika diinginkan
+            downloadLink.download = "form-cuti.pdf"; // Nama file unduhan
 
             // Menambahkan elemen <a> ke dalam dokumen
             document.body.appendChild(downloadLink);
