@@ -5,7 +5,7 @@ function generateRow($from, $to, $conn)
 {
     $contents = '';
 
-    $sql = "SELECT *, employees.employee_id AS empid, attendance.id AS attid FROM attendance LEFT JOIN employees ON employees.id=attendance.employee_id  WHERE attendance.date BETWEEN '$from' AND '$to'";
+    $sql = "SELECT *, employees.employee_id AS empid, attendance.id AS attid FROM attendance INNER JOIN employees ON employees.id=attendance.employee_id  WHERE attendance.date BETWEEN '$from' AND '$to'";
     // echo $sql; exit;
     $query = $conn->query($sql);
     while ($row = $query->fetch_assoc()) {
@@ -14,7 +14,7 @@ function generateRow($from, $to, $conn)
                          <td>" . date('M d, Y', strtotime($row['date'])) . "</td>
                           <td>" . $row['empid'] . "</td>
                           <td>" . $row['firstname'] . ' ' . $row['lastname'] . "</td>
-                          <td>" . date('h:i A', strtotime($row['time_in'])) . $status . "</td>
+                          <td>" . date('h:i A', strtotime($row['time_in'])) ."</td>
                           <td>" . date('h:i A', strtotime($row['time_out'])) . "</td>
                           <td>" . ucwords($row['status_in']) . "</td>
                       </tr>";
@@ -49,7 +49,7 @@ $pdf->SetFont('helvetica', '', 11);
 $pdf->AddPage();
 $content = '';
 $content .= '
-      	<h2 align="center">TechSoft IT Solutions</h2>
+      	<h2 align="center">PT. Trisakti Manunggal Perkasa Internasional</h2>
       	<h4 align="center">' . $from_title . " - " . $to_title . '</h4>
       	<table border="1" cellspacing="0" cellpadding="3">  
            <tr>

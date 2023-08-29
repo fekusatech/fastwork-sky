@@ -74,7 +74,7 @@
                   </thead>
                   <tbody>
                     <?php
-                    $sql = "SELECT *, overtime.id AS otid, employees.employee_id AS empid FROM overtime LEFT JOIN employees ON employees.id=overtime.employee_id ORDER BY date_overtime DESC";
+                    $sql = "SELECT *, overtime.id AS otid, employees.employee_id AS empid FROM overtime INNER JOIN employees ON employees.id=overtime.employee_id ORDER BY date_overtime DESC";
                     $query = $conn->query($sql);
                     while ($row = $query->fetch_assoc()) {
                       echo "

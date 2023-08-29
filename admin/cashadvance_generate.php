@@ -4,9 +4,9 @@ include 'includes/session.php';
 function generateRow($from, $to, $conn, $deduction)
 {
     $contents = '';
-    $sql = "SELECT *, cashadvance.id AS caid, employees.employee_id AS empid FROM cashadvance LEFT JOIN employees ON employees.id=cashadvance.employee_id WHERE cashadvance.date_advance BETWEEN '$from' AND '$to' ORDER BY date_advance DESC";
+    $sql = "SELECT *, cashadvance.id AS caid, employees.employee_id AS empid FROM cashadvance INNER JOIN employees ON employees.id=cashadvance.employee_id WHERE cashadvance.date_advance BETWEEN '$from' AND '$to' ORDER BY date_advance DESC";
 
-    // $sql = "SELECT *, sum(num_hr) AS total_hr, attendance.employee_id AS empid FROM attendance LEFT JOIN employees ON employees.id=attendance.employee_id LEFT JOIN position ON position.id=employees.position_id WHERE date BETWEEN '$from' AND '$to' GROUP BY attendance.employee_id ORDER BY employees.lastname ASC, employees.firstname ASC";
+    // $sql = "SELECT *, sum(num_hr) AS total_hr, attendance.employee_id AS empid FROM attendance INNER JOIN employees ON employees.id=attendance.employee_id LEFT JOIN position ON position.id=employees.position_id WHERE date BETWEEN '$from' AND '$to' GROUP BY attendance.employee_id ORDER BY employees.lastname ASC, employees.firstname ASC";
 
     $query = $conn->query($sql);
     $total = 0;
@@ -69,8 +69,9 @@ $pdf->SetFont('helvetica', '', 11);
 $pdf->AddPage();
 $content = '';
 $content .= '
-      	<h2 align="center">TechSoft IT Solutions</h2>
-      	<h4 align="center">' . $from_title . " - " . $to_title . '</h4>
+      	<h2 align="center">PT. Trisakti Manunggal Perkasa Internasional</h2>
+        <h3 align="center">Pinjaman Pegawai</h3>
+      	<h4 align="center">Periode ' . $from_title . " - " . $to_title . '</h4>
       	<table border="1" cellspacing="0" cellpadding="3">  
            <tr>  
            		 <th>Tanggal</th>

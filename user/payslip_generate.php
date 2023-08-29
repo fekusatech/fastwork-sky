@@ -31,7 +31,7 @@
     $pdf->AddPage(); 
     $contents = '';
 
-	$sql = "SELECT *, SUM(num_hr) AS total_hr, attendance.employee_id AS empid, employees.employee_id AS employee FROM attendance LEFT JOIN employees ON employees.id=attendance.employee_id LEFT JOIN position ON position.id=employees.position_id WHERE date BETWEEN '$from' AND '$to' and employees.id = '{$user['id']}'  GROUP BY attendance.employee_id ORDER BY employees.lastname ASC, employees.firstname ASC";
+	$sql = "SELECT *, SUM(num_hr) AS total_hr, attendance.employee_id AS empid, employees.employee_id AS employee FROM attendance INNER JOIN employees ON employees.id=attendance.employee_id LEFT JOIN position ON position.id=employees.position_id WHERE date BETWEEN '$from' AND '$to' and employees.id = '{$user['id']}'  GROUP BY attendance.employee_id ORDER BY employees.lastname ASC, employees.firstname ASC";
 
 	$query = $conn->query($sql);
 	while($row = $query->fetch_assoc()){
@@ -48,7 +48,7 @@
   		$net = $gross - $total_deduction;
 
 		$contents .= '
-			<h2 align="center">TechSoft IT Solutions</h2>
+			<h2 align="center">PT. Trisakti Manunggal Perkasa Internasional</h2>
 			<h4 align="center">'.$from_title." - ".$to_title.'</h4>
 			<table cellspacing="0" cellpadding="3">  
     	       	<tr>  
@@ -73,13 +73,13 @@
     	    		<td></td> 
     	    		<td></td>
 				 	<td width="25%" align="right">Asuransi: </td>
-				 	<td width="25%" align="right">'.number_format($deduction, 2).'</td> 
+				 	<td width="25%" align="right">('.number_format($deduction, 2).')</td> 
     	    	</tr>
     	    	<tr> 
     	    		<td></td> 
     	    		<td></td>
 				 	<td width="25%" align="right">Pinjaman: </td>
-				 	<td width="25%" align="right">'.number_format($cashadvance, 2).'</td> 
+				 	<td width="25%" align="right">('.number_format($cashadvance, 2).')</td> 
     	    	</tr>
     	    	<tr> 
     	    		<td></td> 

@@ -64,7 +64,7 @@
                 echo "<h3>".$query->num_rows."</h3>";
               ?>
 
-              <p>Total Employees</p>
+              <p>Total Pegawai</p>
             </div>
             <div class="icon">
               <i class="ion ion-person-stalker"></i>
@@ -153,7 +153,7 @@
                     <label>Pilih Tahun: </label>
                     <select class="form-control input-sm" id="select_year">
                       <?php
-                        for($i=2015; $i<=2065; $i++){
+                        for($i=2023; $i<=2065; $i++){
                           $selected = ($i==$year)?'selected':'';
                           echo "
                             <option value='".$i."' ".$selected.">".$i."</option>

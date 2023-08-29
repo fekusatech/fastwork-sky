@@ -44,7 +44,7 @@
 				}
 			}
 			else{
-				$sql = "SELECT *, attendance.id AS uid FROM attendance LEFT JOIN employees ON employees.id=attendance.employee_id WHERE attendance.employee_id = '$id' AND date = '$date_now'";
+				$sql = "SELECT *, attendance.id AS uid FROM attendance INNER JOIN employees ON employees.id=attendance.employee_id WHERE attendance.employee_id = '$id' AND date = '$date_now'";
 				$query = $conn->query($sql);
 				if($query->num_rows < 1){
 					$output['error'] = true;

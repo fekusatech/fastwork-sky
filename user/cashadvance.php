@@ -61,7 +61,7 @@
                 </thead>
                 <tbody>
                   <?php
-                    $sql = "SELECT *, cashadvance.id AS caid, employees.employee_id AS empid FROM cashadvance LEFT JOIN employees ON employees.id=cashadvance.employee_id ORDER BY date_advance DESC";
+                    $sql = "SELECT *, cashadvance.id AS caid, employees.employee_id AS empid FROM cashadvance INNER JOIN employees ON employees.id=cashadvance.employee_id ORDER BY date_advance DESC";
                     $query = $conn->query($sql);
                     while($row = $query->fetch_assoc()){
                       echo "

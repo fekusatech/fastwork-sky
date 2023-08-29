@@ -81,6 +81,7 @@
                                 <table id="example1" class="table table-bordered">
                                     <thead>
                                         <tr>
+                                            <th>ID Karyawan</th>
                                             <th>Nama Karyawan</th>
                                             <th>Tanggal Mulai</th>
                                             <th>Tanggal Selesai</th>
@@ -91,7 +92,7 @@
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $sql = "SELECT leave_requests.*, employees.firstname, employees.lastname
+                                        $sql = "SELECT leave_requests.*, employees.employee_id, employees.firstname, employees.lastname
                                                 FROM leave_requests
                                                 JOIN employees ON leave_requests.user_id = employees.id
                                                 ";
@@ -121,6 +122,7 @@
 
                                             echo "
                                                 <tr>
+                                                <td>{$row['employee_id']}</td>
                                                 <td>" . $row['firstname'] . " " . $row['lastname'] . "</td>
                                                 <td>" . date('M d, Y', strtotime($row['start_date'])) . "</td>
                                                 <td>" . date('M d, Y', strtotime($row['end_date'])) . "</td>

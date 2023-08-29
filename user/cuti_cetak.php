@@ -64,7 +64,7 @@ $pdf->SetFont('helvetica', '', 11);
 $pdf->AddPage();
 $content = '';
 $content .= '
-      	<h2 align="center">TechSoft IT Solutions</h2>
+      	<h2 align="center">PT. Trisakti Manunggal Perkasa Internasional</h2>
       	<h4 align="center">' . $from_title . " - " . $to_title . '</h4>
       	<table border="1" cellspacing="0" cellpadding="3">  
            <tr>

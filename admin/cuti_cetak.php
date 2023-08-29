@@ -5,7 +5,7 @@ function generateRow($from, $to, $conn)
 {
     $contents = '';
 
-    $sql = "SELECT leave_requests.*, employees.firstname, employees.lastname
+    $sql = "SELECT leave_requests.*, employees.employee_id, employees.firstname, employees.lastname
         FROM leave_requests
         JOIN employees ON leave_requests.user_id = employees.id
         WHERE leave_requests.start_date BETWEEN '$from' AND '$to' OR leave_requests.end_date BETWEEN '$from' AND '$to'
@@ -26,6 +26,7 @@ function generateRow($from, $to, $conn)
             $approve_button .= "<a href='#' disabled class='btn btn-danger btn-sm'>Reject</a>";
         }
         $contents .= "<tr>
+                        <td>{$row['employee_id']}</td>
                         <td>" . $row['firstname'] . " " . $row['lastname'] . "</td>
                         <td>" . date('M d, Y', strtotime($row['start_date'])) . "</td>
                         <td>" . date('M d, Y', strtotime($row['end_date'])) . "</td>
@@ -62,10 +63,11 @@ $pdf->SetFont('helvetica', '', 11);
 $pdf->AddPage();
 $content = '';
 $content .= '
-      	<h2 align="center">TechSoft IT Solutions</h2>
+      	<h2 align="center">PT. Trisakti Manunggal Perkasa Internasional</h2>
       	<h4 align="center">' . $from_title . " - " . $to_title . '</h4>
       	<table border="1" cellspacing="0" cellpadding="3">  
            <tr>
+                <th>ID Karyawan</th> 
                 <th>Nama Karyawan</th>
                 <th>Tanggal Mulai</th>
                 <th>Tanggal Selesai</th>

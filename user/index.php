@@ -8,9 +8,16 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   	<div class="login-logo">
-  		<b>User Login</b>
+  		
   	</div>
-  
+	  <div class="login-box">
+    <div class="login-logo">
+    <div class="text-center">
+    <img class="mb-4" src="LogoTMPI.png" width="150" height="150"></div>
+    <h2>PT. Trisakti Manunggal Perkasa Internasional</h2>
+	<h3>User Login</h3>
+    </div>
+  </div>
   	<div class="login-box-body">
     	<p class="login-box-msg">Masuk untuk memulai sesi Anda</p>
 

@@ -88,7 +88,7 @@
                   </thead>
                   <tbody>
                     <?php
-                    $sql = "SELECT *, employees.employee_id AS empid, attendance.id AS attid FROM attendance LEFT JOIN employees ON employees.id=attendance.employee_id WHERE employees.employee_id = '{$user['employee_id']}'";
+                    $sql = "SELECT *, employees.employee_id AS empid, attendance.id AS attid FROM attendance INNER JOIN employees ON employees.id=attendance.employee_id WHERE employees.employee_id = '{$user['employee_id']}'";
                     // Filter Tanggal
                     if (isset($_GET['tanggal_mulai']) && isset($_GET['tanggal_selesai'])) {
                       $tanggal_mulai = $_GET['tanggal_mulai'];
