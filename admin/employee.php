@@ -50,9 +50,10 @@
               <div class="box-header with-border">
                 <a href="#addnew" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> New</a>
               </div>
-              <div class="box-body">
+              <div class="box-body table-responsive">
                 <table id="example1" class="table table-bordered">
                   <thead>
+                    <th>No</th>
                     <th>ID Karyawan</th>
                     <th>Photo</th>
                     <th>Nama</th>
@@ -66,9 +67,11 @@
                     <?php
                     $sql = "SELECT *, employees.id AS empid FROM employees LEFT JOIN position ON position.id=employees.position_id LEFT JOIN schedules ON schedules.id=employees.schedule_id";
                     $query = $conn->query($sql);
+                    $no = 1;
                     while ($row = $query->fetch_assoc()) {
                     ?>
                       <tr>
+                        <td><?php echo $no++; ?></td>
                         <td><?php echo $row['employee_id']; ?></td>
                         <td><img src="<?php echo (!empty($row['photo'])) ? '../images/' . $row['photo'] : '../images/profile.jpg'; ?>" width="30px" height="30px"> <a href="#edit_photo" data-toggle="modal" class="pull-right photo" data-id="<?php echo $row['empid']; ?>"><span class="fa fa-edit"></span></a></td>
                         <td><?php echo $row['firstname'] . ' ' . $row['lastname']; ?></td>

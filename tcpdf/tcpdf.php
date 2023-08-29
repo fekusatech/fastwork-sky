@@ -17745,7 +17745,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 							$tw += ($prevrMargin - $this->rMargin);
 						}
 						$one_space_width = $this->GetStringWidth(chr(32));
-						$no = 0; // number of spaces on a line contained on a single block
+						$no = 1; // number of spaces on a line contained on a single block
 						if ($this->isRTLTextDir()) { // RTL
 							// remove left space if exist
 							$pos1 = TCPDF_STATIC::revstrpos($pmid, '[(');
@@ -18693,7 +18693,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 					$tw += ($prevrMargin - $this->rMargin);
 				}
 				$one_space_width = $this->GetStringWidth(chr(32));
-				$no = 0; // number of spaces on a line contained on a single block
+				$no = 1; // number of spaces on a line contained on a single block
 				if ($this->isRTLTextDir()) { // RTL
 					// remove left space if exist
 					$pos1 = TCPDF_STATIC::revstrpos($pmid, '[(');

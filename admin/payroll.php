@@ -54,20 +54,23 @@ $range_from = date('m/d/Y', strtotime('-30 day', strtotime($range_to)));
               <div class="box-header with-border">
                 <div class="pull-right">
                   <form method="POST" class="form-inline" id="payForm">
-                    <div class="input-group">
-                      <div class="input-group-addon">
-                        <i class="fa fa-calendar"></i>
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-addon">
+                          <i class="fa fa-calendar"></i>
+                        </div>
+                        <input type="text" class="form-control pull-right col-sm-8" id="reservation" name="date_range" value="<?php echo (isset($_GET['range'])) ? $_GET['range'] : $range_from . ' - ' . $range_to; ?>">
                       </div>
-                      <input type="text" class="form-control pull-right col-sm-8" id="reservation" name="date_range" value="<?php echo (isset($_GET['range'])) ? $_GET['range'] : $range_from . ' - ' . $range_to; ?>">
                     </div>
                     <button type="button" class="btn btn-success btn-sm btn-flat" id="payroll"><span class="glyphicon glyphicon-print"></span> Daftar Gaji</button>
                     <button type="button" class="btn btn-primary btn-sm btn-flat" id="payslip"><span class="glyphicon glyphicon-print"></span> Slip Gaji</button>
                   </form>
                 </div>
               </div>
-              <div class="box-body">
+              <div class="box-body table-responsive">
                 <table id="example1" class="table table-bordered">
                   <thead>
+                    <th>No</th>
                     <th>Nama Karyawan</th>
                     <th>ID Karyawan</th>
                     <th>Gaji Kotor</th>
@@ -98,6 +101,7 @@ $range_from = date('m/d/Y', strtotime('-30 day', strtotime($range_to)));
 
                     $query = $conn->query($sql);
                     $total = 0;
+                    $no = 1;
                     while ($row = $query->fetch_assoc()) {
                       $empid = $row['empid'];
 
@@ -115,12 +119,13 @@ $range_from = date('m/d/Y', strtotime('-30 day', strtotime($range_to)));
                       $net = $gross - $total_deduction + $datalmr['total_lembur'];
                       echo "
                         <tr>
+                          <td>" . $no++ . "</td>
                           <td>" . $row['lastname'] . ", " . $row['firstname'] . "</td>
                           <td>" . $row['employee_id'] . "</td>
                           <td>" . number_format($gross, 2) . "</td>
                           <td>" . number_format($deduction, 2) . "</td>
                           <td>" . number_format($cashadvance, 2) . "</td>
-                          <td>{$datalmr['total_lembur']}</td>
+                          <td>" . number_format($datalmr['total_lembur'], 2) . "</td>
                           <td>" . number_format($net, 2) . "</td>
                         </tr>
                       ";

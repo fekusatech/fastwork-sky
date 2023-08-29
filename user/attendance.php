@@ -74,10 +74,11 @@
               <div class="box-header with-border">
                 <!-- <a href="#addnew" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> New</a> -->
               </div>
-              <div class="box-body">
+              <div class="box-body table-responsive">
                 <table id="example1" class="table table-bordered">
                   <thead>
                     <th class="hidden"></th>
+                    <th>No</th>
                     <th>Tanggal</th>
                     <th>ID Karyawan</th>
                     <th>Nama</th>
@@ -95,7 +96,7 @@
                       $tanggal_selesai = $_GET['tanggal_selesai'];
                       $sql .= " AND attendance.date BETWEEN '$tanggal_mulai' AND '$tanggal_selesai'";
                     }
-                    $sql .= " ORDER BY attendance.date DESC, attendance.time_in DESC";
+                    $sql .= " ORDER BY attendance.id DESC";
                     $query = $conn->query($sql);
                     $no = 1;
                     while ($row = $query->fetch_assoc()) {
@@ -109,11 +110,13 @@
                       echo "
                         <tr>
                           <td class='hidden'></td>
+                          <td>" . $nonya . "</td>
                           <td>" . date('M d, Y', strtotime($row['date'])) . "</td>
                           <td>" . $row['empid'] . "</td>
                           <td>" . $row['firstname'] . ' ' . $row['lastname'] . "</td>
                           <td>" . date('h:i A', strtotime($row['time_in'])) . $status . "</td>
                           <td>" . date('h:i A', strtotime($row['time_out'])) . "</td>
+                          <td>" . ucwords($row['status_in']) . "</td>
                           <td>
                             <button class='btn btn-danger btn-sm btn-flat delete' data-id='" . $row['attid'] . "' $disabled><i class='fa fa-trash'></i> Delete</button>
                           </td>

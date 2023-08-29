@@ -83,10 +83,11 @@ $sisacuti = $datacuti['sisa_cuti'];
                             <div class="box-header with-border">
                                 <button class="btn btn-primary" data-toggle="modal" data-target="#addnewleave"><i class="fa fa-plus"></i> Ajukan Cuti</button>
                             </div>
-                            <div class="box-body">
+                            <div class="box-body table-responsive">
                                 <table id="example1" class="table table-bordered">
                                     <thead>
                                         <tr>
+                                            <th>No</th>
                                             <th>Nama Karyawan</th>
                                             <th>Tanggal Mulai</th>
                                             <th>Tanggal Selesai</th>
@@ -108,6 +109,7 @@ $sisacuti = $datacuti['sisa_cuti'];
                                         $sql .= "ORDER BY leave_requests.start_date DESC";
                                         $query = $conn->query($sql);
                                         $printbutton = "";
+                                        $no = 1;
                                         while ($row = $query->fetch_assoc()) {
                                             if ($row['status'] == "pending") {
                                                 $status = "<span class='label label-primary badge-pill'>" . ucwords($row['status']) . "</span>";
@@ -119,6 +121,7 @@ $sisacuti = $datacuti['sisa_cuti'];
                                             }
                                             echo "
                                                 <tr>
+                                                <td>" . $no++ . "</td>
                                                 <td>" . $row['firstname'] . " " . $row['lastname'] . "</td>
                                                 <td>" . date('M d, Y', strtotime($row['start_date'])) . "</td>
                                                 <td>" . date('M d, Y', strtotime($row['end_date'])) . "</td>

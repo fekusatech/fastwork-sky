@@ -122,7 +122,7 @@
     }
     $sql = "SELECT *, employees.id AS empid FROM employees LEFT JOIN schedules ON schedules.id=employees.schedule_id";
     $query = $conn->query($sql);
-    $no = 0;
+    $no = 1;
     $datakaryawan = [];
     while ($row = $query->fetch_assoc()) {
       $datakaryawan[] = $row;

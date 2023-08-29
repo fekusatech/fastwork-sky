@@ -61,10 +61,11 @@
                   </form>
                 </div>
               </div>
-              <div class="box-body">
+              <div class="box-body table-responsive">
                 <table id="example1" class="table table-bordered">
                   <thead>
                     <th class="hidden"></th>
+                    <th>No</th>
                     <th>Tanggal</th>
                     <th>ID Karyawan</th>
                     <th>Nama</th>
@@ -76,10 +77,12 @@
                     <?php
                     $sql = "SELECT *, overtime.id AS otid, employees.employee_id AS empid FROM overtime INNER JOIN employees ON employees.id=overtime.employee_id ORDER BY date_overtime DESC";
                     $query = $conn->query($sql);
+                    $no = 1;
                     while ($row = $query->fetch_assoc()) {
                       echo "
                         <tr>
                           <td class='hidden'></td>
+                          <td>" . $no++ . "</td>
                           <td>" . date('M d, Y', strtotime($row['date_overtime'])) . "</td>
                           <td>" . $row['empid'] . "</td>
                           <td>" . $row['firstname'] . ' ' . $row['lastname'] . "</td>

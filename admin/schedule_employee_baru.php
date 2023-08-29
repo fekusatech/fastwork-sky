@@ -50,7 +50,7 @@
               <div class="box-header with-border">
                 <a href="schedule_print.php" class="btn btn-success btn-sm btn-flat"><span class="glyphicon glyphicon-print"></span> Print</a>
               </div>
-              <div class="box-body">
+              <div class="box-body table-responsive">
                 <table id="example1" class="table table-bordered">
                   <thead>
                     <th>ID Karyawan</th>
@@ -82,7 +82,7 @@
                     }
                     $sql = "SELECT *, employees.id AS empid FROM employees LEFT JOIN schedules ON schedules.id=employees.schedule_id";
                     $query = $conn->query($sql);
-                    $no = 0;
+                    $no = 1;
                     $datakaryawan = [];
                     while ($row = $query->fetch_assoc()) {
                       $datakaryawan[] = $row;

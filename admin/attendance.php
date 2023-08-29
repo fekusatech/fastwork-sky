@@ -74,10 +74,11 @@
               <div class="box-header with-border">
                 <a href="#addnew" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> New</a>
               </div>
-              <div class="box-body">
+              <div class="box-body table-responsive">
                 <table id="example1" class="table table-bordered">
                   <thead>
                     <th class="hidden"></th>
+                    <th>No</th>
                     <th>Tanggal</th>
                     <th>ID Karyawan</th>
                     <th>Nama</th>
@@ -95,13 +96,15 @@
                       $tanggal_selesai = $_GET['tanggal_selesai'];
                       $sql .= " WHERE attendance.date BETWEEN '$tanggal_mulai' AND '$tanggal_selesai'";
                     }
-                    $sql .= " ORDER BY attendance.date DESC, attendance.time_in DESC";
+                    $sql .= " ORDER BY attendance.id DESC";
                     $query = $conn->query($sql);
+                    $no = 1;
                     while ($row = $query->fetch_assoc()) {
                       $status = ($row['status']) ? '<span class="label label-warning pull-right">ontime</span>' : '<span class="label label-danger pull-right">late</span>';
                       echo "
                         <tr>
                           <td class='hidden'></td>
+                          <td>" . $no++ . "</td>
                           <td>" . date('M d, Y', strtotime($row['date'])) . "</td>
                           <td>" . $row['empid'] . "</td>
                           <td>" . $row['firstname'] . ' ' . $row['lastname'] . "</td>
