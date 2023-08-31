@@ -10,10 +10,11 @@
 		$contact = $_POST['contact'];
 		$gender = $_POST['gender'];
 		$jatah_cuti = $_POST['jatah_cuti'];
+		$max_payment = $_POST['max_payment'];
 		$position = $_POST['position'];
 		$schedule = $_POST['schedule'];
 		
-		$sql = "UPDATE employees SET jatah_cuti = '$jatah_cuti',firstname = '$firstname', lastname = '$lastname', address = '$address', birthdate = '$birthdate', contact_info = '$contact', gender = '$gender', position_id = '$position', schedule_id = '$schedule' WHERE id = '$empid'";
+		$sql = "UPDATE employees SET max_payment = '$max_payment', jatah_cuti = '$jatah_cuti',firstname = '$firstname', lastname = '$lastname', address = '$address', birthdate = '$birthdate', contact_info = '$contact', gender = '$gender', position_id = '$position', schedule_id = '$schedule' WHERE id = '$empid'";
 		if($conn->query($sql)){
 			$_SESSION['success'] = 'Employee updated successfully';
 		}

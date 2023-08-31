@@ -59,6 +59,7 @@
                     <th>Nama</th>
                     <th>Posisi</th>
                     <th>Jatah Cuti</th>
+                    <th>Max Pinjaman</th>
                     <th>Jadwal Kerja</th>
                     <th>Tanggal Masuk</th>
                     <th>Aksi</th>
@@ -77,6 +78,7 @@
                         <td><?php echo $row['firstname'] . ' ' . $row['lastname']; ?></td>
                         <td><?php echo $row['description']; ?></td>
                         <td><?php echo $row['jatah_cuti']; ?></td>
+                        <td>Rp <?php echo number_format($row['max_payment']); ?></td>
                         <td><?php echo date('h:i A', strtotime($row['time_in'])) . ' - ' . date('h:i A', strtotime($row['time_out'])); ?></td>
                         <td><?php echo date('M d, Y', strtotime($row['created_on'])) ?></td>
                         <td>
@@ -143,6 +145,7 @@
           $('#datepicker_edit').val(response.birthdate);
           $('#edit_contact').val(response.contact_info);
           $('#edit_jatah_cuti').val(response.jatah_cuti);
+          $('#edit_max_payment').val(response.max_payment);
           $('#gender_val').val(response.gender).html(response.gender);
           $('#gender_val').val(response.gender).html(response.gender);
           $('#position_val').val(response.position_id).html(response.description);

@@ -109,8 +109,8 @@
                                         while ($row = $query->fetch_assoc()) {
                                             if ($row['status'] == "pending") {
                                                 $status = "<span class='label label-primary badge-pill'>" . ucwords($row['status']) . "</span>";
-                                                $approve_button = "<a href='cuti_approve.php?id=" . $row['id'] . "&action=approve' class='btn btn-xs btn-success btn-sm' onclick='return confirmAction(\"approve\")'>Approve</a>&nbsp;";
-                                                $approve_button .= "<a href='cuti_approve.php?id=" . $row['id'] . "&action=reject' class='btn btn-xs btn-danger btn-sm' onclick='return confirmAction(\"reject\")'>Reject</a>";
+                                                $approve_button = "<a href='cuti_approve.php?id=" . $row['id'] . "&action=approve' class='btn btn-xs btn-success btn-sm' onclick='return confirmAction(\"approve\",`acc`)'>Approve</a>&nbsp;";
+                                                $approve_button .= "<a href='cuti_approve.php?id=" . $row['id'] . "&action=reject' class='btn btn-xs btn-danger btn-sm' onclick='return confirmAction(\"reject\",`acc`)'>Reject</a>";
                                             } else if ($row['status'] == "rejected") {
                                                 $status = "<span class='label label-danger badge-pill'>" . ucwords($row['status']) . "</span>";
                                                 $approve_button = "<a href='#' disabled class='btn btn-xs btn-success btn-sm'>Approve</a>&nbsp;";
@@ -121,6 +121,7 @@
                                                 $approve_button .= "<a href='#' disabled class='btn btn-xs btn-danger btn-sm'>Reject</a>";
                                             }
                                             $printbutton = "<a href='#' class='btn btn-xs btn-primary' onclick='cetakcutiform(`{$row['id']}`)' type='button'><i class='fa fa-print'></i> Cetak</a>";
+                                            $deletebutton = "<a href='cuti_delete.php?id=" . $row['id'] . "' class='btn btn-xs btn-danger' onclick='return confirmAction(\"reject\",`delete`)' type='button'><i class='fa fa-trash'></i> Delete</a>";
 
                                             echo "
                                                 <tr>
@@ -131,7 +132,7 @@
                                                 <td>" . date('M d, Y', strtotime($row['end_date'])) . "</td>
                                                 <td>" . $status . "</td>
                                                 <td>" . $row['keterangan'] . "</td>
-                                                <td>" . $approve_button . "&nbsp; $printbutton</td>
+                                                <td>" . $approve_button . "&nbsp; $printbutton &nbsp; $deletebutton</td>
                                                 </tr>
                                             ";
                                         }
@@ -183,7 +184,7 @@
                             <div class="form-group">
                                 <label for="status">Status:</label>
                                 <select class="form-control" name="status">
-                                    <option value="approved">Setujui</option>
+                                    <!-- <option value="approved">Setujui</option> -->
                                     <option value="pending">Pending</option>
                                     <option value="rejected">Tolak</option>
                                 </select>
@@ -198,15 +199,17 @@
                 </div>
             </div>
         </div>
-
-
-
     </div>
     <?php include 'includes/scripts.php'; ?>
     <script>
-        function confirmAction(action) {
-            var confirmationMessage = "Apakah Anda yakin ingin " + (action === "approve" ? "menyetujui" : "menolak") + " permintaan cuti ini?";
-            return confirm(confirmationMessage);
+        function confirmAction(action,methode) {
+            if(methode == "acc"){
+                var confirmationMessage = "Apakah Anda yakin ingin " + (action === "approve" ? "menyetujui" : "menolak") + " permintaan cuti ini?";
+                return confirm(confirmationMessage);
+            }else{
+                var confirmationMessage = "Apakah Anda yakin ingin menghapus permintaan cuti ini?";
+                return confirm(confirmationMessage);
+            }
         }
 
         function cetakcuti() {

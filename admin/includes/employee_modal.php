@@ -100,6 +100,12 @@
             </div>
           </div>
           <div class="form-group">
+            <label for="max_payment" class="col-sm-3 control-label">Maks Pinjaman (Rp)</label>
+            <div class="col-sm-9">
+              <input type="number" class="form-control" id="max_payment" name="max_payment">
+            </div>
+          </div>
+          <div class="form-group">
             <label for="photo" class="col-sm-3 control-label">Photo</label>
 
             <div class="col-sm-9">
@@ -216,6 +222,12 @@
             <label for="edit_jatah_cuti" class="col-sm-3 control-label">Jatah Cuti</label>
             <div class="col-sm-9">
               <input type="number" class="form-control" id="edit_jatah_cuti" name="jatah_cuti">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="edit_max_payment" class="col-sm-3 control-label">Maks Pinjaman (Rp)</label>
+            <div class="col-sm-9">
+              <input type="number" class="form-control" id="edit_max_payment" name="max_payment">
             </div>
           </div>
       </div>

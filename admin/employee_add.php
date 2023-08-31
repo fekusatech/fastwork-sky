@@ -9,6 +9,7 @@ if (isset($_POST['add'])) {
 	$contact = $_POST['contact'];
 	$gender = $_POST['gender'];
 	$jatah_cuti = $_POST['jatah_cuti'];
+	$max_payment = $_POST['max_payment'];
 	$position = $_POST['position'];
 	$schedule = $_POST['schedule'];
 	$filename = $_FILES['photo']['name'];
@@ -37,7 +38,7 @@ if (isset($_POST['add'])) {
 		// Menggabungkan nilai bagian awal dengan nilai yang sudah diperbarui
 		$employee_id = substr($nilai, 0, -3) . $formattedNextValue;
 	}
-	$sql = "INSERT INTO employees (employee_id, firstname, lastname, address, birthdate, contact_info, gender, position_id, schedule_id, photo,jatah_cuti) VALUES ('$employee_id', '$firstname', '$lastname', '$address', '$birthdate', '$contact', '$gender', '$position', '$schedule', '$filename', '$jatah_cuti')";
+	$sql = "INSERT INTO employees (employee_id, firstname, lastname, address, birthdate, contact_info, gender, position_id, schedule_id, photo,jatah_cuti,max_payment) VALUES ('$employee_id', '$firstname', '$lastname', '$address', '$birthdate', '$contact', '$gender', '$position', '$schedule', '$filename', '$jatah_cuti', '$max_payment')";
 	if ($conn->query($sql)) {
 		$_SESSION['success'] = 'Employee added successfully';
 	} else {
