@@ -22,7 +22,7 @@
 				$query = $conn->query($sql);
 				if($query->num_rows > 0){
 					$output['error'] = true;
-					$output['message'] = 'You have timed in for today';
+					$output['message'] = 'Kamu sudah absen masuk hari ini';
 				}
 				else{
 					//updates
@@ -48,13 +48,13 @@
 				$query = $conn->query($sql);
 				if($query->num_rows < 1){
 					$output['error'] = true;
-					$output['message'] = 'Cannot Timeout. No time in.';
+					$output['message'] = 'Tidak bisa absen pulang. Karena anda belum absen masuk';
 				}
 				else{
 					$row = $query->fetch_assoc();
 					if($row['time_out'] != '00:00:00'){
 						$output['error'] = true;
-						$output['message'] = 'You have timed out for today';
+						$output['message'] = 'Kamu sudah absen pulang hari ini';
 					}
 					else{
 						

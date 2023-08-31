@@ -6,9 +6,9 @@ if (isset($_POST['login'])) {
 	$username = $_POST['username'];
 	$password = $_POST['password'];
 	//login admin dulu di cek
-	$sql = "SELECT * FROM admin WHERE username = '$username'";
+	// $sql = "SELECT * FROM admin WHERE username = '$username'";
+	$sql = "SELECT * FROM employees WHERE employee_id = '$username' AND password='$password' and role ='admin'";
 	$query = $conn->query($sql);
-
 	if ($query->num_rows < 1) {
 		//Jika tidak ada cek user biasa
 		$sql = "SELECT * FROM employees WHERE employee_id = '$username' AND password='$password'";
@@ -24,14 +24,18 @@ if (isset($_POST['login'])) {
 		}
 	} else {
 		$row = $query->fetch_assoc();
-		if (password_verify($password, $row['password'])) {
-			$_SESSION['admin'] = $row['id'];
-			$_SESSION['data'] = $row;
-			echo "<script>window.location.href = '$admin_url';</script>";
-			exit;
-		} else {
-			$_SESSION['error'] = 'Incorrect password';
-		}
+		$_SESSION['admin'] = $row['id'];
+		$_SESSION['data'] = $row;
+		echo "<script>window.location.href = '$admin_url';</script>";
+		exit;
+		// if (password_verify($password, $row['password'])) {
+		// 	$_SESSION['admin'] = $row['id'];
+		// 	$_SESSION['data'] = $row;
+		// 	echo "<script>window.location.href = '$admin_url';</script>";
+		// 	exit;
+		// } else {
+		// 	$_SESSION['error'] = 'Incorrect password';
+		// }
 	}
 } else {
 	$_SESSION['error'] = 'Input admin credentials first';
