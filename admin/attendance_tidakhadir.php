@@ -83,7 +83,7 @@
                                         <th>ID Karyawan</th>
                                         <th>Nama</th>
                                         <th>Keterangan</th>
-                                        <th>Aksi</th>
+                                        <!-- <th>Aksi</th> -->
                                     </thead>
                                     <tbody>
                                         <?php
@@ -107,10 +107,10 @@
                           <td>" . $row['empid'] . "</td>
                           <td>" . $row['firstname'] . ' ' . $row['lastname'] . "</td>
                           <td>" . ucwords($row['status_in']) . $status."</td>
-                          <td>
+                          <!--<td>
                             <button class='btn btn-success btn-sm btn-flat edit' data-id='" . $row['attid'] . "'><i class='fa fa-edit'></i> Edit</button>
                             <button class='btn btn-danger btn-sm btn-flat delete' data-id='" . $row['attid'] . "'><i class='fa fa-trash'></i> Delete</button>
-                          </td>
+                          </td>-->
                         </tr>
                       ";
                                         }
