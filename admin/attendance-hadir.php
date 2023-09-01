@@ -60,7 +60,7 @@
                     </select>
                   </div>
                   <div class="form-group has-feedback">
-                    <input type="text" class="form-control input-lg" id="employee" name="employee" required readonly value="<?= $user['employee_id'] ?>">
+                    <input type="text" class="form-control input-lg" id="employee" name="employee" required value="<?= $user['employee_id'] ?>">
                     <i class="fa fa-user-plus form-control-feedback"></i>
                   </div>
                   <div class="row">
