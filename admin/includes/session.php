@@ -5,7 +5,9 @@ include 'includes/conn.php';
 if (!isset($_SESSION['admin']) || trim($_SESSION['admin']) == '') {
 	header('location: index.php');
 }
-
+if (!isset($_SESSION['data'])) {
+	header('location: index.php');
+}
 // $sql = "SELECT * FROM admin WHERE id = '".$_SESSION['admin']."'";
 $sql = "SELECT * FROM employees WHERE id = '" . $_SESSION['admin'] . "'";
 
