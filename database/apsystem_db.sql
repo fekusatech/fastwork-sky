@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 31, 2023 at 01:34 AM
+-- Generation Time: Sep 01, 2023 at 01:40 AM
 -- Server version: 8.0.30
 -- PHP Version: 7.4.6
 
@@ -54,9 +54,9 @@ CREATE TABLE `attendance` (
   `id` int NOT NULL,
   `employee_id` int NOT NULL,
   `date` date NOT NULL,
-  `time_in` time NOT NULL,
+  `time_in` time DEFAULT NULL,
   `status` int NOT NULL,
-  `status_in` enum('in','ijin','sakit','cuti') DEFAULT 'in',
+  `status_in` enum('in','ijin','sakit','cuti','no') CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT 'in',
   `time_out` time DEFAULT '00:00:00',
   `num_hr` double DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -108,7 +108,57 @@ INSERT INTO `attendance` (`id`, `employee_id`, `date`, `time_in`, `status`, `sta
 (125, 24, '2023-08-20', '08:00:00', 1, 'cuti', '17:00:00', 8),
 (126, 19, '2023-08-19', '10:00:00', 0, 'in', '10:01:00', 0.016666666666667),
 (127, 21, '2023-08-19', '10:14:26', 0, 'in', '10:14:43', 0),
-(128, 31, '2023-08-31', '07:23:10', 1, 'in', '00:00:00', 0);
+(129, 31, '2023-08-31', '08:00:00', 1, 'cuti', '17:00:00', 8);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `attendance_tidakhadir`
+--
+
+CREATE TABLE `attendance_tidakhadir` (
+  `id` int NOT NULL,
+  `employee_id` int NOT NULL,
+  `date` date NOT NULL,
+  `time_in` time DEFAULT NULL,
+  `status` int NOT NULL,
+  `status_in` enum('in','ijin','sakit','cuti','no') CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT 'in',
+  `time_out` time DEFAULT '00:00:00',
+  `num_hr` double DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `attendance_tidakhadir`
+--
+
+INSERT INTO `attendance_tidakhadir` (`id`, `employee_id`, `date`, `time_in`, `status`, `status_in`, `time_out`, `num_hr`) VALUES
+(1, 3, '2023-09-01', NULL, 0, 'no', '00:00:00', 0),
+(2, 4, '2023-09-01', NULL, 0, 'no', '00:00:00', 0),
+(3, 5, '2023-09-01', NULL, 0, 'no', '00:00:00', 0),
+(4, 6, '2023-09-01', NULL, 0, 'no', '00:00:00', 0),
+(5, 7, '2023-09-01', NULL, 0, 'no', '00:00:00', 0),
+(6, 8, '2023-09-01', NULL, 0, 'no', '00:00:00', 0),
+(7, 9, '2023-09-01', NULL, 0, 'no', '00:00:00', 0),
+(8, 10, '2023-09-01', NULL, 0, 'no', '00:00:00', 0),
+(9, 11, '2023-09-01', NULL, 0, 'no', '00:00:00', 0),
+(10, 12, '2023-09-01', NULL, 0, 'no', '00:00:00', 0),
+(11, 13, '2023-09-01', NULL, 0, 'no', '00:00:00', 0),
+(12, 14, '2023-09-01', NULL, 0, 'no', '00:00:00', 0),
+(13, 15, '2023-09-01', NULL, 0, 'no', '00:00:00', 0),
+(14, 16, '2023-09-01', NULL, 0, 'no', '00:00:00', 0),
+(15, 17, '2023-09-01', NULL, 0, 'no', '00:00:00', 0),
+(16, 18, '2023-09-01', NULL, 0, 'no', '00:00:00', 0),
+(17, 19, '2023-09-01', NULL, 0, 'no', '00:00:00', 0),
+(18, 20, '2023-09-01', NULL, 0, 'no', '00:00:00', 0),
+(19, 21, '2023-09-01', NULL, 0, 'no', '00:00:00', 0),
+(20, 22, '2023-09-01', NULL, 0, 'no', '00:00:00', 0),
+(21, 23, '2023-09-01', NULL, 0, 'no', '00:00:00', 0),
+(22, 24, '2023-09-01', NULL, 0, 'no', '00:00:00', 0),
+(23, 28, '2023-09-01', NULL, 0, 'no', '00:00:00', 0),
+(24, 29, '2023-09-01', NULL, 0, 'no', '00:00:00', 0),
+(25, 30, '2023-09-01', NULL, 0, 'no', '00:00:00', 0),
+(26, 31, '2023-09-01', NULL, 0, 'no', '00:00:00', 0),
+(27, 32, '2023-09-01', NULL, 0, 'no', '00:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -173,40 +223,42 @@ CREATE TABLE `employees` (
   `photo` varchar(200) NOT NULL,
   `role` enum('employee','admin') DEFAULT 'employee',
   `created_on` datetime DEFAULT CURRENT_TIMESTAMP,
-  `jatah_cuti` int DEFAULT '21'
+  `jatah_cuti` int DEFAULT '21',
+  `max_payment` varchar(50) NOT NULL DEFAULT '5000000'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `employees`
 --
 
-INSERT INTO `employees` (`id`, `employee_id`, `password`, `firstname`, `lastname`, `address`, `birthdate`, `contact_info`, `gender`, `position_id`, `schedule_id`, `photo`, `role`, `created_on`, `jatah_cuti`) VALUES
-(3, 'DYE473869250', 'password', 'Julyn', 'Divinagracia', 'E.B. Magalona', '1992-05-02', '09123456789', 'Female', 2, 2, '', 'employee', '2018-04-30 00:00:00', 21),
-(4, 'JIE625973480', 'password', 'Gemalyn', 'Cepe', 'Carmen, Bohol', '1995-10-02', '09468029840', 'Female', 2, 3, '', 'employee', '2018-04-30 00:00:00', 21),
-(5, 'TQO238109674', 'password', 'Bruno', 'Den', 'Test', '1995-08-23', '5454578965', 'Male', 1, 2, 'thanossmile.jpg', 'employee', '2018-07-11 00:00:00', 21),
-(6, 'EDQ203874591', 'password', 'Henry', 'Doe', 'New St. Esp', '1991-07-25', '9876543210', 'Male', 2, 4, 'male.png', 'employee', '2018-07-11 00:00:00', 21),
-(7, 'TWY781946302', 'password', 'Johnny', 'Jr', 'Esp', '1995-07-11', '8467067344', 'Male', 1, 2, 'profile.jpg', 'employee', '2018-07-11 00:00:00', 21),
-(8, 'GWZ071342865', 'password', 'Tonny', 'Jr', 'Esp 12 South Street', '1994-07-19', '9876543210', 'Male', 1, 2, 'profile.jpg', 'employee', '2018-07-11 00:00:00', 21),
-(9, 'HEL079321846', 'password', 'Jacob', 'Carter', 'St12 N1', '1995-07-18', '5454578965', 'Male', 1, 2, 'profile.jpg', 'employee', '2018-07-11 00:00:00', 21),
-(10, 'OCN273564901', 'password', 'Benjamin', 'Cohen', 'TEST', '1991-07-25', '78548852145', 'Male', 2, 3, 'profile.jpg', 'employee', '2018-07-11 00:00:00', 21),
-(11, 'PGX413705682', 'password', 'Ethan', 'Carson', 'DEMO', '1994-07-19', '8467067344', 'Male', 1, 2, 'profile.jpg', 'employee', '2018-07-11 00:00:00', 21),
-(12, 'YWX536478912', 'password', 'Daniel', 'Cooper', 'Test', '1995-07-11', '9876543210', 'Male', 2, 4, 'profile.jpg', 'employee', '2018-07-11 00:00:00', 21),
-(13, 'ALB590623481', 'password', 'Emma', 'Wallis', 'Test', '1994-07-19', '9632145655', 'Female', 1, 3, 'female4.jpg', 'employee', '2018-07-11 00:00:00', 21),
-(14, 'IOV153842976', 'password', 'Sophia', 'Maguire', 'Test', '1995-07-11', '5454578965', 'Female', 2, 2, 'profile.jpg', 'employee', '2018-07-11 00:00:00', 21),
-(15, 'CAB835624170', 'password', 'Mia', 'Hollister', 'Test', '1995-07-18', '9632145655', 'Female', 2, 3, 'profile.jpg', 'employee', '2018-07-11 00:00:00', 21),
-(16, 'MGZ312906745', 'password', 'Emily', 'JK', 'Test', '1996-07-24', '9876543210', 'Female', 2, 3, 'profile.jpg', 'employee', '2018-07-11 00:00:00', 21),
-(17, 'HSP067892134', 'password', 'Nakia', 'Grey', 'Test', '1995-10-24', '8467067344', 'Female', 1, 2, 'profile.jpg', 'employee', '2018-07-11 00:00:00', 21),
-(18, 'BVH081749563', 'password', 'Dave', 'Cruze', 'Demo', '1990-01-02', '5454578965', 'Male', 2, 2, 'profile.jpg', 'employee', '2018-07-11 00:00:00', 21),
-(19, 'ZTC714069832', 'password', 'Logan', 'Paul', 'Esp 16', '1994-12-30', '0202121255', 'Male', 1, 1, 'profile.jpg', 'employee', '2018-07-11 00:00:00', 21),
-(20, 'VFT157620348', 'password', 'Jack', 'Adler', 'Test', '1991-07-25', '6545698880', 'Male', 1, 4, 'profile.jpg', 'employee', '2018-07-11 00:00:00', 21),
-(21, 'XRF342608719', 'password', 'Mason', 'Beckett', 'Demo', '1996-07-24', '8467067344', 'Male', 2, 1, 'profile.jpg', 'employee', '2018-07-11 00:00:00', 1),
-(22, 'LVO541238690', 'password', 'Lucas', 'Cooper', 'Demo', '1995-07-18', '9632145655', 'Male', 2, 1, 'profile.jpg', 'employee', '2018-07-11 00:00:00', 21),
-(23, 'AEI036154829', 'password', 'Alex', 'Cohen', 'Demo', '1995-08-23', '9632145655', 'Male', 1, 2, 'profile.jpg', 'employee', '2018-07-11 00:00:00', 21),
-(24, '18082023001', 'password', 'Test', '123', '123', '1996-02-28', '123', 'Male', 1, 2, '', 'employee', '2023-08-18 00:00:00', 12),
-(28, '18082023002', 'password', 'Febri', 'Kukuh Santoso', 'asdas', '2023-08-17', '12', 'Male', 1, 2, '', 'employee', '2023-08-18 13:43:00', 3),
-(29, '18082023003', 'password', 'Test3', 'asd', 'asd', '2023-08-29', '12', 'Male', 2, 1, '', 'employee', '2023-08-18 13:48:59', 21),
-(30, '18082023004', 'password', 'Emerson', 'Roth', 'Ex cupidatat est eo', '2023-08-16', 'Commodi dolores est ', 'Male', 1, 4, '', 'employee', '2023-08-19 09:28:44', 1),
-(31, '123456789', 'password', 'Admin', 'Admin', 'E.B. Magalona', '1992-05-02', '09123456789', 'Female', 2, 2, '', 'admin', '2018-04-30 00:00:00', 21);
+INSERT INTO `employees` (`id`, `employee_id`, `password`, `firstname`, `lastname`, `address`, `birthdate`, `contact_info`, `gender`, `position_id`, `schedule_id`, `photo`, `role`, `created_on`, `jatah_cuti`, `max_payment`) VALUES
+(3, 'DYE473869250', 'password', 'Julyn', 'Divinagracia', 'E.B. Magalona', '1992-05-02', '09123456789', 'Female', 2, 2, '', 'employee', '2018-04-30 00:00:00', 21, '5000000'),
+(4, 'JIE625973480', 'password', 'Gemalyn', 'Cepe', 'Carmen, Bohol', '1995-10-02', '09468029840', 'Female', 2, 3, '', 'employee', '2018-04-30 00:00:00', 21, '5000000'),
+(5, 'TQO238109674', 'password', 'Bruno', 'Den', 'Test', '1995-08-23', '5454578965', 'Male', 1, 2, 'thanossmile.jpg', 'employee', '2018-07-11 00:00:00', 21, '5000000'),
+(6, 'EDQ203874591', 'password', 'Henry', 'Doe', 'New St. Esp', '1991-07-25', '9876543210', 'Male', 2, 4, 'male.png', 'employee', '2018-07-11 00:00:00', 21, '5000000'),
+(7, 'TWY781946302', 'password', 'Johnny', 'Jr', 'Esp', '1995-07-11', '8467067344', 'Male', 1, 2, 'profile.jpg', 'employee', '2018-07-11 00:00:00', 21, '5000000'),
+(8, 'GWZ071342865', 'password', 'Tonny', 'Jr', 'Esp 12 South Street', '1994-07-19', '9876543210', 'Male', 1, 2, 'profile.jpg', 'employee', '2018-07-11 00:00:00', 21, '5000000'),
+(9, 'HEL079321846', 'password', 'Jacob', 'Carter', 'St12 N1', '1995-07-18', '5454578965', 'Male', 1, 2, 'profile.jpg', 'employee', '2018-07-11 00:00:00', 21, '5000000'),
+(10, 'OCN273564901', 'password', 'Benjamin', 'Cohen', 'TEST', '1991-07-25', '78548852145', 'Male', 2, 3, 'profile.jpg', 'employee', '2018-07-11 00:00:00', 21, '5000000'),
+(11, 'PGX413705682', 'password', 'Ethan', 'Carson', 'DEMO', '1994-07-19', '8467067344', 'Male', 1, 2, 'profile.jpg', 'employee', '2018-07-11 00:00:00', 21, '5000000'),
+(12, 'YWX536478912', 'password', 'Daniel', 'Cooper', 'Test', '1995-07-11', '9876543210', 'Male', 2, 4, 'profile.jpg', 'employee', '2018-07-11 00:00:00', 21, '5000000'),
+(13, 'ALB590623481', 'password', 'Emma', 'Wallis', 'Test', '1994-07-19', '9632145655', 'Female', 1, 3, 'female4.jpg', 'employee', '2018-07-11 00:00:00', 21, '5000000'),
+(14, 'IOV153842976', 'password', 'Sophia', 'Maguire', 'Test', '1995-07-11', '5454578965', 'Female', 2, 2, 'profile.jpg', 'employee', '2018-07-11 00:00:00', 21, '5000000'),
+(15, 'CAB835624170', 'password', 'Mia', 'Hollister', 'Test', '1995-07-18', '9632145655', 'Female', 2, 3, 'profile.jpg', 'employee', '2018-07-11 00:00:00', 21, '5000000'),
+(16, 'MGZ312906745', 'password', 'Emily', 'JK', 'Test', '1996-07-24', '9876543210', 'Female', 2, 3, 'profile.jpg', 'employee', '2018-07-11 00:00:00', 21, '5000000'),
+(17, 'HSP067892134', 'password', 'Nakia', 'Grey', 'Test', '1995-10-24', '8467067344', 'Female', 1, 2, 'profile.jpg', 'employee', '2018-07-11 00:00:00', 21, '5000000'),
+(18, 'BVH081749563', 'password', 'Dave', 'Cruze', 'Demo', '1990-01-02', '5454578965', 'Male', 2, 2, 'profile.jpg', 'employee', '2018-07-11 00:00:00', 21, '5000000'),
+(19, 'ZTC714069832', 'password', 'Logan', 'Paul', 'Esp 16', '1994-12-30', '0202121255', 'Male', 1, 1, 'profile.jpg', 'employee', '2018-07-11 00:00:00', 21, '5000000'),
+(20, 'VFT157620348', 'password', 'Jack', 'Adler', 'Test', '1991-07-25', '6545698880', 'Male', 1, 4, 'profile.jpg', 'employee', '2018-07-11 00:00:00', 21, '5000000'),
+(21, 'XRF342608719', 'password', 'Mason', 'Beckett', 'Demo', '1996-07-24', '8467067344', 'Male', 2, 1, 'profile.jpg', 'employee', '2018-07-11 00:00:00', 1, '5000000'),
+(22, 'LVO541238690', 'password', 'Lucas', 'Cooper', 'Demo', '1995-07-18', '9632145655', 'Male', 2, 1, 'profile.jpg', 'employee', '2018-07-11 00:00:00', 21, '5000000'),
+(23, 'AEI036154829', 'password', 'Alex', 'Cohen', 'Demo', '1995-08-23', '9632145655', 'Male', 1, 2, 'profile.jpg', 'employee', '2018-07-11 00:00:00', 21, '5000000'),
+(24, '18082023001', 'password', 'Test', '123', '123', '1996-02-28', '123', 'Male', 1, 2, '', 'employee', '2023-08-18 00:00:00', 12, '5000000'),
+(28, '18082023002', 'password', 'Febri', 'Kukuh Santoso', 'asdas', '2023-08-17', '12', 'Male', 1, 2, '', 'employee', '2023-08-18 13:43:00', 3, '5000000'),
+(29, '18082023003', 'password', 'Test3', 'asd', 'asd', '2023-08-29', '12', 'Male', 2, 1, '', 'employee', '2023-08-18 13:48:59', 21, '5000000'),
+(30, '18082023004', 'password', 'Emerson', 'Roth', 'Ex cupidatat est eo', '2023-08-16', 'Commodi dolores est ', 'Male', 1, 4, '', 'employee', '2023-08-19 09:28:44', 1, '5000000'),
+(31, '123456789', 'password', 'Admin', 'Admin', 'E.B. Magalona', '1992-05-02', '09123456789', 'Female', 2, 2, '', 'admin', '2018-04-30 00:00:00', 21, '10000'),
+(32, '18082023005', 'password', 'Zelda', 'Patrick', 'Dolor ipsam tempora ', '2023-08-09', 'Asperiores expedita ', 'Female', 1, 4, '', 'employee', '2023-08-31 22:17:42', 21, '20000');
 
 -- --------------------------------------------------------
 
@@ -232,7 +284,8 @@ INSERT INTO `leave_requests` (`id`, `user_id`, `start_date`, `end_date`, `status
 (2, 21, '2023-01-10', '2023-01-12', 'approved', 'Et labore atque quas'),
 (6, 23, '2023-08-17', '2023-08-18', 'approved', 'A'),
 (7, 15, '2023-08-19', '2023-08-21', 'pending', 'Testt'),
-(8, 24, '2023-08-19', '2023-08-20', 'approved', '213123');
+(8, 24, '2023-08-19', '2023-08-20', 'approved', '213123'),
+(10, 31, '2023-08-31', '2023-08-31', 'approved', 'test');
 
 -- --------------------------------------------------------
 
@@ -320,6 +373,12 @@ ALTER TABLE `attendance`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `attendance_tidakhadir`
+--
+ALTER TABLE `attendance_tidakhadir`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `cashadvance`
 --
 ALTER TABLE `cashadvance`
@@ -375,13 +434,19 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `attendance`
 --
 ALTER TABLE `attendance`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=130;
+
+--
+-- AUTO_INCREMENT for table `attendance_tidakhadir`
+--
+ALTER TABLE `attendance_tidakhadir`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `cashadvance`
 --
 ALTER TABLE `cashadvance`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `deductions`
@@ -393,13 +458,13 @@ ALTER TABLE `deductions`
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `leave_requests`
 --
 ALTER TABLE `leave_requests`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `overtime`
