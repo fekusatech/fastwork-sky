@@ -14,10 +14,10 @@
 						<div class="col-sm-9">
 							<select class="form-control" id="employee" name="employee" required>
 								<?php
-								$sql = "SELECT e.* from employees e";
+								$sql = "select (IFNULL((e.max_payment - (select sum(amount) from cashadvance where cashadvance.employee_id = e.id)),e.max_payment)) as sisa,e.* from employees e";
 								$query = $conn->query($sql);
 								while ($row = $query->fetch_assoc()) {
-									echo "<option value='" . $row['employee_id'] . "'>" . $row['employee_id'] . " - " . $row['firstname'] . " " . $row['lastname'] . " (Max Pinjaman: Rp ".number_format($row['max_payment']).")</option>";
+									echo "<option value='" . $row['employee_id'] . "'>" . $row['employee_id'] . " - " . $row['firstname'] . " " . $row['lastname'] . " (Max Pinjaman: Rp ".number_format($row['sisa']).")</option>";
 								}
 								?>
 							</select>
