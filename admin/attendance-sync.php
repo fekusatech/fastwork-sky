@@ -3,8 +3,10 @@ include 'includes/session.php';
 include '../conn.php';
 include '../timezone.php';
 
-$datenow = date('Y-m-d');
-$timenow = date('H:i');
+// $datenow = date('Y-m-d');
+$datenow = date('2023-09-03');
+$timenow = date('18:00');
+// $timenow = date('H:i');
 $datelimit = "15:00";
 $sql = "SELECT * FROM employees";
 $squery = $conn->query($sql);
@@ -14,7 +16,7 @@ $squery = $conn->query($sql);
 $status = false;
 $_SESSION['success'] = 'Tidak ada data sync';
 while ($em = $squery->fetch_assoc()) {
-    echo $em['id'] . "<br>";
+    
     $sql = "SELECT * FROM attendance where employee_id ='{$em['id']}' and date ='{$datenow}'";
     $query = $conn->query($sql);
     $dataabsen = $query->fetch_assoc();

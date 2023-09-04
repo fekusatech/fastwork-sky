@@ -83,7 +83,7 @@
                                         <th>ID Karyawan</th>
                                         <th>Nama</th>
                                         <th>Keterangan</th>
-                                        <!-- <th>Aksi</th> -->
+                                        <th>Aksi</th>
                                     </thead>
                                     <tbody>
                                         <?php
@@ -98,7 +98,7 @@
                                         $query = $conn->query($sql);
                                         $no = 1;
                                         while ($row = $query->fetch_assoc()) {
-                                            $status = ($row['status']) ? '<span class="label label-warning pull-right">ontime</span>' : '<span class="label label-danger pull-right">Tidak Masuk</span>';
+                                            $status = ($row['status']) ? '<span class="label label-warning">ontime</span>' : '<span class="label label-danger">Tidak Masuk</span>';
                                             echo "
                         <tr>
                           <td class='hidden'></td>
@@ -106,11 +106,11 @@
                           <td>" . date('M d, Y', strtotime($row['date'])) . "</td>
                           <td>" . $row['empid'] . "</td>
                           <td>" . $row['firstname'] . ' ' . $row['lastname'] . "</td>
-                          <td>" . ucwords($row['status_in']) . $status."</td>
-                          <!--<td>
-                            <button class='btn btn-success btn-sm btn-flat edit' data-id='" . $row['attid'] . "'><i class='fa fa-edit'></i> Edit</button>
+                          <td>" . $status."</td>
+                          <td>
+                            <!--<button class='btn btn-success btn-sm btn-flat edit' data-id='" . $row['attid'] . "'><i class='fa fa-edit'></i> Edit</button>-->
                             <button class='btn btn-danger btn-sm btn-flat delete' data-id='" . $row['attid'] . "'><i class='fa fa-trash'></i> Delete</button>
-                          </td>-->
+                          </td>
                         </tr>
                       ";
                                         }
@@ -125,7 +125,7 @@
         </div>
 
         <?php include 'includes/footer.php'; ?>
-        <?php include 'includes/attendance_modal.php'; ?>
+        <?php include 'includes/attendance_tidakhadir_modal.php'; ?>
     </div>
     <?php include 'includes/scripts.php'; ?>
     <script>
@@ -148,7 +148,7 @@
         function getRow(id) {
             $.ajax({
                 type: 'POST',
-                url: 'attendance_row.php',
+                url: 'attendance_row_tidakhadir.php',
                 data: {
                     id: id
                 },
