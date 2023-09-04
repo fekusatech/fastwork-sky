@@ -94,7 +94,7 @@
                                             $tanggal_selesai = $_GET['tanggal_selesai'];
                                             $sql .= " WHERE attendance_tidakhadir.date BETWEEN '$tanggal_mulai' AND '$tanggal_selesai'";
                                         }
-                                        $sql .= " ORDER BY attendance_tidakhadir.id DESC";
+                                        $sql .= " ORDER BY attendance_tidakhadir.id, attendance_tidakhadir.date DESC";
                                         $query = $conn->query($sql);
                                         $no = 1;
                                         while ($row = $query->fetch_assoc()) {

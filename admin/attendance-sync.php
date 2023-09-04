@@ -3,10 +3,10 @@ include 'includes/session.php';
 include '../conn.php';
 include '../timezone.php';
 
-// $datenow = date('Y-m-d');
-$datenow = date('2023-09-03');
-$timenow = date('18:00');
-// $timenow = date('H:i');
+// $datenow = date('2023-09-01');
+// $timenow = date('18:00');
+$datenow = date('Y-m-d');
+$timenow = date('H:i');
 $datelimit = "15:00";
 $sql = "SELECT * FROM employees";
 $squery = $conn->query($sql);
