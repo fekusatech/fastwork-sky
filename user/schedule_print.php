@@ -39,7 +39,7 @@
     $content = '';  
     $content .= '
       	<h2 align="center">PT. Trisakti Manunggal Perkasa Internasional</h2>
-      	<h4 align="center">Employee Schedule</h4>
+      	<h4 align="center">Jadwal Kerja</h4>
       	<table border="1" cellspacing="0" cellpadding="3">  
            <tr>  
            		<th width="40%" align="center"><b>Nama Karyawan</b></th>

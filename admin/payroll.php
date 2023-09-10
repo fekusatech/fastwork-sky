@@ -120,7 +120,7 @@ $range_from = date('m/d/Y', strtotime('-30 day', strtotime($range_to)));
                       echo "
                         <tr>
                           <td>" . $no++ . "</td>
-                          <td>" . $row['lastname'] . ", " . $row['firstname'] . "</td>
+                          <td>" . $row['lastname'] . " " . $row['firstname'] . "</td>
                           <td>" . $row['employee_id'] . "</td>
                           <td>" . number_format($gross, 2) . "</td>
                           <td>" . number_format($deduction, 2) . "</td>

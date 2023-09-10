@@ -1,8 +1,8 @@
 <?php
 if (isset($_GET['id']) && isset($_GET['action'])) {
     include 'includes/session.php';
-    $leave_request_id = $_GET['id']; // Ambil ID permintaan cuti dari URL
-    $action = $_GET['action']; // Ambil tindakan (approve/reject) dari URL
+    $leave_request_id = $_GET['id']; // Ambil ID permintaan cuti
+    $action = $_GET['action']; // Ambil tindakan (approve/reject) 
 
     // Lakukan pengecekan status dan lakukan tindakan sesuai dengan action
     $sql = "SELECT * FROM leave_requests WHERE id = $leave_request_id";
@@ -22,7 +22,7 @@ if (isset($_GET['id']) && isset($_GET['action'])) {
                 while ($attendance_date <= new DateTime($end_date)) {
                     $attendance_date_str = $attendance_date->format('Y-m-d');
                     $attendance_sql = "INSERT INTO attendance (employee_id, date, time_in, status, status_in, time_out, num_hr) 
-                               VALUES ('$employee_id', '$attendance_date_str', '08:00:00', 1, 'cuti', '17:00:00', 8)";
+                               VALUES ('$employee_id', '$attendance_date_str', '--:--:--', 1, 'cuti', '--:--:--', 0)";
                     $conn->query($attendance_sql);
 
                     $attendance_date->modify('+1 day'); // Lanjutkan ke tanggal berikutnya

@@ -61,7 +61,7 @@
                                     </div>
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-primary">Filter</button>
-                                        <a href="#" class="btn btn-success" onclick="cetakabsen()" type="button"><i class="fa fa-print"></i> Cetak</a>
+                                        <!--<a href="#" class="btn btn-success" onclick="cetakabsen()" type="button"><i class="fa fa-print"></i> Cetak</a>-->
                                     </div>
                                 </form>
                             </div>

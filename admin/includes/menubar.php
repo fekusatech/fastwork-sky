@@ -18,8 +18,9 @@
       <li class="header">MANAGE</li>
 
       <li><a href="cuti.php"><i class="fa fa-calendar-plus-o"></i> <span>Manajemen Cuti</span></a></li>
-      <li><a href="attendance.php"><i class="fa fa-calendar"></i> <span>Absensi</span></a></li>
-      <li><a href="attendance_tidakhadir.php"><i class="fa fa-user-times"></i> <span>Karyawan Tidak Absen</span></a></li>
+      <li><a href="attendance.php"><i class="fa fa-calendar"></i> <span>Daftar Presensi</span></a></li>
+      <li><a href="attendance_tidakhadir.php"><i class="fa fa-user-times"></i> <span>Karyawan Tidak Hadir</span></a></li>
+      <li><a href="laporan_modal.php"><i class="fa fa-file"></i> <span>Laporan</span></a></li>
       <li class="treeview">
         <a href="#">
           <i class="fa fa-users"></i>

@@ -22,7 +22,7 @@ if (isset($_POST['employee'])) {
 			$query = $conn->query($sql);
 			if ($query->num_rows > 0) {
 				$output['error'] = true;
-				$output['message'] = 'Kamu sudah absen masuk hari ini';
+				$output['message'] = 'Anda sudah mengklik presensi hari ini';
 			} else {
 				//updates
 				$sched = $row['schedule_id'];

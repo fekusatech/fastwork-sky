@@ -38,8 +38,8 @@
     $pdf->AddPage();  
     $content = '';  
     $content .= '
-      	<h2 align="center">TechSoft IT Solutions</h2>
-      	<h4 align="center">Employee Schedule</h4>
+      	<h2 align="center">PT. Trisakti Manunggal Perkasa Internasional</h2>
+      	<h3 align="center">Jadwal Kerja Pegawai</h3>
       	<table border="1" cellspacing="0" cellpadding="3">  
            <tr>  
            		<th width="40%" align="center"><b>Nama Karyawan</b></th>
@@ -49,7 +49,8 @@
       ';  
     $content .= generateRow($conn); 
     $content .= '</table>';  
-    
+
+    $content .= '<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>';
 $content .= "<br><br><p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;font-size:11.0pt;font-family:'Calibri',sans-serif;'><span style='font-size:16px;line-height:107%;font-family:'Times New Roman',serif;'>Mengetahui,&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;Bandung, &hellip; ".date('M Y')." </span></p>
 <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;font-size:11.0pt;font-family:'Calibri',sans-serif;'><span style='font-size:16px;line-height:107%;font-family:'Times New Roman',serif;'>&nbsp;</span></p>
 <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;font-size:11.0pt;font-family:'Calibri',sans-serif;'><span style='font-size:16px;line-height:107%;font-family:'Times New Roman',serif;'>&nbsp;</span></p>

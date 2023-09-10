@@ -15,7 +15,7 @@
     <div class="text-center">
     <img class="mb-4" src="LogoTMPI.png" width="150" height="150"></div>
     <h2>PT. Trisakti Manunggal Perkasa Internasional</h2>
-	<h3>User Login</h3>
+	<h3></h3>
     </div>
   </div>
   	<div class="login-box-body">
