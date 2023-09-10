@@ -92,7 +92,7 @@ $sisacuti = $datacuti['sisa_cuti'];
                                             <th>Tanggal Mulai</th>
                                             <th>Tanggal Selesai</th>
                                             <th>Status</th>
-                                            <th>Aksi</th>
+                                            <!-- <th>Aksi</th> -->
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -115,6 +115,8 @@ $sisacuti = $datacuti['sisa_cuti'];
                                                 $status = "<span class='label label-primary badge-pill'>" . ucwords($row['status']) . "</span>";
                                             } else if ($row['status'] == "rejected") {
                                                 $status = "<span class='label label-danger badge-pill'>" . ucwords($row['status']) . "</span>";
+                                            } else if ($row['status'] == "ajukan ulang") {
+                                                $status = "<span class='label label-warning badge-pill'>Cuti Expired, Ajukan Ulang</span>";
                                             } else {
                                                 $status = "<span class='label label-success badge-pill'>" . ucwords($row['status']) . "</span>";
                                                 $printbutton = "<a href='#' class='btn btn-xs btn-primary' onclick='cetakcutiform(`{$row['id']}`)' type='button'><i class='fa fa-print'></i> Cetak</a>";
@@ -126,7 +128,7 @@ $sisacuti = $datacuti['sisa_cuti'];
                                                 <td>" . date('M d, Y', strtotime($row['start_date'])) . "</td>
                                                 <td>" . date('M d, Y', strtotime($row['end_date'])) . "</td>
                                                 <td>" . $status . "</td>
-                                                <td>" . $printbutton . "</td>
+                                                <!--<td>" . $printbutton . "</td>-->
                                                 </tr>
                                             ";
                                         }

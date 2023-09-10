@@ -1,7 +1,6 @@
 <?php
 include 'includes/session.php';
 
-
 if (isset($_POST['employee_id']) && isset($_POST['tanggal_mulai']) && isset($_POST['tanggal_selesai']) && isset($_POST['alasan'])) {
     $employee_id = $_POST['employee_id']; // Ambil ID karyawan dari formulir
     $tanggal_mulai = $_POST['tanggal_mulai'];
@@ -10,6 +9,16 @@ if (isset($_POST['employee_id']) && isset($_POST['tanggal_mulai']) && isset($_PO
     $status = $_POST['status'];
 
     // Lakukan validasi tanggal dan lainnya sesuai kebutuhan
+
+    // Validasi tanggal mulai tidak boleh lebih kecil dari tanggal hari ini
+    $today = strtotime(date('Y-m-d')); // Mengambil tanggal hari ini dalam format UNIX
+    $start_date_unix = strtotime($tanggal_mulai);
+
+    if ($start_date_unix < $today) {
+        $_SESSION['error'] = "Tanggal mulai tidak dapat lebih kecil dari tanggal hari ini.";
+        header('Location: cuti.php');
+        exit();
+    }
 
     // Cek sisa cuti karyawan
 

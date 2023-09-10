@@ -115,6 +115,10 @@
                                                 $status = "<span class='label label-danger badge-pill'>" . ucwords($row['status']) . "</span>";
                                                 $approve_button = "<a href='#' disabled class='btn btn-xs btn-success btn-sm'>Approve</a>&nbsp;";
                                                 $approve_button .= "<a href='#' disabled class='btn btn-xs btn-danger btn-sm'>Reject</a>";
+                                            } else if ($row['status'] == "ajukan ulang") {
+                                                $status = "<span class='label label-warning badge-pill'>Cuti Expired, Ajukan Ulang</span>";
+                                                $approve_button = "<a href='#' disabled class='btn btn-xs btn-success btn-sm'>Approve</a>&nbsp;";
+                                                $approve_button .= "<a href='#' disabled class='btn btn-xs btn-danger btn-sm'>Reject</a>";
                                             } else {
                                                 $status = "<span class='label label-success badge-pill'>" . ucwords($row['status']) . "</span>";
                                                 $approve_button = "<a href='#' disabled class='btn btn-xs btn-success btn-sm'>Approve</a>&nbsp;";
@@ -202,11 +206,11 @@
     </div>
     <?php include 'includes/scripts.php'; ?>
     <script>
-        function confirmAction(action,methode) {
-            if(methode == "acc"){
+        function confirmAction(action, methode) {
+            if (methode == "acc") {
                 var confirmationMessage = "Apakah Anda yakin ingin " + (action === "approve" ? "menyetujui" : "menolak") + " permintaan cuti ini?";
                 return confirm(confirmationMessage);
-            }else{
+            } else {
                 var confirmationMessage = "Apakah Anda yakin ingin menghapus permintaan cuti ini?";
                 return confirm(confirmationMessage);
             }
