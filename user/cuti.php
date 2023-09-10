@@ -92,7 +92,7 @@ $sisacuti = $datacuti['sisa_cuti'];
                                             <th>Tanggal Mulai</th>
                                             <th>Tanggal Selesai</th>
                                             <th>Status</th>
-                                            <!-- <th>Aksi</th> -->
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -128,7 +128,7 @@ $sisacuti = $datacuti['sisa_cuti'];
                                                 <td>" . date('M d, Y', strtotime($row['start_date'])) . "</td>
                                                 <td>" . date('M d, Y', strtotime($row['end_date'])) . "</td>
                                                 <td>" . $status . "</td>
-                                                <!--<td>" . $printbutton . "</td>-->
+                                                <td>" . $printbutton . "</td>
                                                 </tr>
                                             ";
                                         }
